@@ -1,5 +1,6 @@
 package com.ironbank.model.accounts;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,9 +16,13 @@ import java.util.Date;
 
 
 public class Accounts {
+    /*@Column(precision = 32, scale = 4)*/
+    @AttributeOverrides({
+            @AttributeOverride(name = "amount", column = @Column(name = "balance")),
+            @AttributeOverride(name = "currency", column = @Column(name = "balance_currency"))
+    })
     @Embedded
     private Money balance;
-    @Embedded
     private String secretKey;
     private String primaryOwner;
     private String secondaryOwner;

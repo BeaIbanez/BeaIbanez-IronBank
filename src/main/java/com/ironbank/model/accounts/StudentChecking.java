@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @Table
 @Entity
-public class StudentChecking {
+public class StudentChecking extends Accounts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

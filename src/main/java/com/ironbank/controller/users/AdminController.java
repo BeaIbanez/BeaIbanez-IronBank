@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/admins")
@@ -24,14 +25,14 @@ public class AdminController {
     }
 
     //Id
-    @GetMapping
+    @GetMapping(path = "/id")
     @ResponseStatus(HttpStatus.OK)
-    public List<Admin> findById(@RequestParam long id) {
+    public Admin findById(@RequestParam long id) {
         return adminService.findById(id);
     }
 
     //Name
-    @GetMapping
+    @GetMapping(path = "/name")
     @ResponseStatus(HttpStatus.OK)
     public List<Admin> findByName(@RequestParam String name) {
         return adminService.findByName(name);
@@ -48,19 +49,12 @@ public class AdminController {
 
     //PATCHMAPPING
     //changeName
-    @PatchMapping("/name/{id}")
+    @PatchMapping("/changename/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Admin changeName(@PathVariable Long id, @RequestBody Admin name) {
         return adminService.changeName(id, name);
     }
 
-    //PUTMAPPING
-    //upDateAdmin
-    @PutMapping(path = "/adminupdate/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Admin upDateAdmin(@PathVariable Long id, @RequestBody Admin admin) {
-        return adminService.upDateAdmin(id, admin);
-    }
     //PUTMAPPING
     //deleteAdmin
     @DeleteMapping("/id/{id}")

@@ -1,6 +1,5 @@
 package com.ironbank.service.accounts;
 
-import com.ironbank.model.accounts.Checking;
 import com.ironbank.model.accounts.Credit;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Status;
@@ -8,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface CreditService {
 
     List<Credit> findAll();

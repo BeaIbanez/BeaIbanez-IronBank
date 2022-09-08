@@ -1,27 +1,28 @@
 package com.ironbank.model.accounts;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
-
 import java.math.RoundingMode;
 import java.math.BigDecimal;
 import java.util.Currency;
 
-
-@Getter
-@Setter
-@NoArgsConstructor
 @Embeddable
+@Setter
+@Getter
+@Access(AccessType.FIELD)
 public class Money {
 
     private static final Currency EUR = Currency.getInstance("EUR");
     private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
 
+
     private final Currency currency;
+
+
     private BigDecimal amount;
 
     /**
@@ -47,6 +48,9 @@ public class Money {
         this(amount, EUR, DEFAULT_ROUNDING);
     }
 
+    public Money() {
+        this.currency = Currency.getInstance("USD");
+    }
 
 
     public BigDecimal increaseAmount(Money money) {

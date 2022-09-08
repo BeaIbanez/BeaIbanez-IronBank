@@ -1,6 +1,5 @@
 package com.ironbank.controller.accounts;
 
-import com.ironbank.model.accounts.Checking;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Status;
 import com.ironbank.model.accounts.StudentChecking;

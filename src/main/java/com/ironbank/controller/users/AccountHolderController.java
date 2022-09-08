@@ -26,14 +26,14 @@ public class AccountHolderController {
     }
 
     //Id
-    @GetMapping
+    @GetMapping(path = "/id")
     @ResponseStatus(HttpStatus.OK)
     public List<AccountHolder> findById(@RequestParam long id) {
         return accountHolderService.findById(id);
     }
 
     //Name
-    @GetMapping
+    @GetMapping(path = "/name")
     @ResponseStatus(HttpStatus.OK)
     public List< AccountHolder> findByName(@RequestParam String name) {
         return accountHolderService.findByName(name);

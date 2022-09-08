@@ -25,21 +25,21 @@ public class ThirdPartyController {
     }
 
     //Id
-    @GetMapping
+    @GetMapping(path = "/id")
     @ResponseStatus(HttpStatus.OK)
     public List<ThirdParty> findById(@RequestParam long id) {
         return thirdPartyService.findById(id);
     }
 
     //Name
-    @GetMapping
+    @GetMapping(path = "/name")
     @ResponseStatus(HttpStatus.OK)
     public List<ThirdParty> findByName(@RequestParam String name) {
         return thirdPartyService.findByName(name);
     }
 
     //HashKey
-    @GetMapping
+    @GetMapping(path = "/hashkey")
     @ResponseStatus(HttpStatus.OK)
     public List<Admin> findByHashKey(@RequestParam String hashkey) {
         return thirdPartyService.findByHashKey(hashkey);

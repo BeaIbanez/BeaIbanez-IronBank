@@ -25,7 +25,7 @@ class adminTest {
     @Autowired
     WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    /*private final ObjectMapper objectMapper = new ObjectMapper();*/
 
     @Autowired
     private AdminRepository adminRepository;
