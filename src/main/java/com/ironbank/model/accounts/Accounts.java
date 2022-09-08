@@ -18,7 +18,7 @@ public class Accounts {
     @Embedded
     private Money balance;
     @Embedded
-    private Money secretKey;
+    private String secretKey;
     private String primaryOwner;
     private String secondaryOwner;
     private BigDecimal penaltyFee;
