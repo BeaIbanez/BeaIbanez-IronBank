@@ -3,6 +3,7 @@ package com.ironbank.Users;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.ironbank.model.users.Admin;
+import com.ironbank.repositories.users.AdminRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @SpringBootTest
@@ -28,7 +28,7 @@ class adminTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
-    private com.ironbank.repositories.users.adminRepository adminRepository;
+    private AdminRepository adminRepository;
     @BeforeEach
     void setUp_() {
               adminRepository.deleteAll();

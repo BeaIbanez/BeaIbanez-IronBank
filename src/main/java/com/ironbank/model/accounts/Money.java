@@ -12,17 +12,16 @@ import java.math.BigDecimal;
 import java.util.Currency;
 
 
-@Embeddable
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@Embeddable
 public class Money {
 
     private static final Currency EUR = Currency.getInstance("EUR");
     private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
 
-    private final Currency currency;//TEORICAMENTE FALTA EL FINAL ENTRE PRIVATE Y CURRENCY
+    private final Currency currency;
     private BigDecimal amount;
 
     /**
@@ -85,4 +84,6 @@ public class Money {
     public String toString() {
         return getCurrency().getSymbol() + " " + getAmount();
     }
+
+
 }
