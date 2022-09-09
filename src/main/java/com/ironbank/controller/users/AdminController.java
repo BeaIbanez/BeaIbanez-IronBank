@@ -24,14 +24,14 @@ public class AdminController {
         return adminService.findAll();
     }
 
-    //Id
+    //Id //TODO
     @GetMapping(path = "/id")
     @ResponseStatus(HttpStatus.OK)
     public Admin findById(@RequestParam long id) {
         return adminService.findById(id);
     }
 
-    //Name
+    //Name //TODO
     @GetMapping(path = "/name")
     @ResponseStatus(HttpStatus.OK)
     public List<Admin> findByName(@RequestParam String name) {

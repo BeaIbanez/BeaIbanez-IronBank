@@ -1,9 +1,7 @@
 package com.ironbank.controller.users;
 
 import com.ironbank.model.users.AccountHolder;
-import com.ironbank.model.users.Admin;
 import com.ironbank.service.users.AccountHolderService;
-import com.ironbank.service.users.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,15 +23,15 @@ public class AccountHolderController {
         return accountHolderService.findAll();
     }
 
-    //Id
+    //Id //TODO
     @GetMapping(path = "/id")
     @ResponseStatus(HttpStatus.OK)
-    public List<AccountHolder> findById(@RequestParam long id) {
+    public AccountHolder findById(@RequestParam long id) {
         return accountHolderService.findById(id);
     }
 
-    //Name
-    @GetMapping(path = "/name")
+    //Name //TODO
+    @GetMapping(path = "/name/")
     @ResponseStatus(HttpStatus.OK)
     public List< AccountHolder> findByName(@RequestParam String name) {
         return accountHolderService.findByName(name);
@@ -49,7 +47,7 @@ public class AccountHolderController {
     //DateOfBirth
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Admin> findByDateOfBirth(@RequestParam String birth) {
+    public List<AccountHolder> findByDateOfBirth(@RequestParam String birth) {
         return accountHolderService.findByDateOfBirth(birth);
     }
 

@@ -11,18 +11,18 @@ public interface ThirdPartyService {
 
     List<ThirdParty> findAll();
 
-    List<ThirdParty> findById(long id);
+   ThirdParty findById(long id);
 
     List<ThirdParty> findByName(String name);
 
-    List<Admin> findByHashKey(String hashkey);
+    List<ThirdParty> findByHashKey(String hashedKey);
 
 
     ThirdParty upDateThirdParty(Long id, ThirdParty thirdParty);
 
     ThirdParty changeName(Long id, ThirdParty name);
 
-    ThirdParty create(ThirdParty admin);
+    ThirdParty create(ThirdParty thirdParty);
 
     void deleteAdmin(long id);
 

@@ -25,7 +25,7 @@ public class AdminServiceImpl implements AdminService {
     public Admin findById(long id) {
         return repository.findById(id).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                "Patient with id " + id + "not found."));
+                "Admin with id " + id + "not found."));
     }
 
     @Override

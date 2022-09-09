@@ -1,8 +1,7 @@
 package com.ironbank.service.users;
 
 import com.ironbank.model.users.AccountHolder;
-import com.ironbank.model.users.Admin;
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
@@ -11,13 +10,13 @@ public interface AccountHolderService {
 
     List<AccountHolder> findAll();
 
-    List<AccountHolder> findById(long id);
+    AccountHolder findById(long id);
 
     List<AccountHolder> findByName(String name);
 
-    AccountHolder create(AccountHolder admin);
+    AccountHolder create(AccountHolder accountholder);
 
-    List<Admin> findByDateOfBirth(String birth);
+    List<AccountHolder> findByDateOfBirth(String birth);
 
     AccountHolder changeName(Long id, AccountHolder name);
 
