@@ -1,14 +1,19 @@
 package com.ironbank.service.accounts;
 
+import com.ironbank.http.requestAccounts.TransferBalanceRequest;
+import com.ironbank.model.AccountStatement;
 import com.ironbank.model.accounts.Checking;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Status;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transaction;
 import java.util.List;
 
 @Service
 public class CheckingServiceImpl implements CheckingService {
+
+
     @Override
     public List<Checking> findAll() {
         return null;
@@ -61,6 +66,27 @@ public class CheckingServiceImpl implements CheckingService {
 
     @Override
     public Checking changeBalance(Long id, Checking balance) {
+        return null;
+    }
+
+    @Override
+    public Checking save(Checking checking) {
+       return null;
+    }
+
+
+    @Override
+    public Transaction sendMoney(TransferBalanceRequest transferBalanceRequest) {
+        return null;
+    }
+
+    @Override
+    public AccountStatement getStatement(String accountNumber) {
+        return null;
+    }
+
+    @Override
+    public Checking findByAccountNumberEquals(String primaryOwner) {
         return null;
     }
 }

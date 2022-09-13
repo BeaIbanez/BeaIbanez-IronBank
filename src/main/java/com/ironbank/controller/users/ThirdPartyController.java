@@ -24,24 +24,22 @@ public class ThirdPartyController {
         return thirdPartyService.findAll();
     }
 
-    //Id //TODO
-    @GetMapping(path = "/id")
+    @GetMapping(path = "/id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ThirdParty findById(@RequestParam long id) {
+    public ThirdParty findById(@PathVariable("id") long id) {
         return thirdPartyService.findById(id);
     }
 
-    //Name //TODO
-    @GetMapping(path = "/name")
+    //Name
+    @GetMapping(path = "/name/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public List<ThirdParty> findByName(@RequestParam String name) {
+    public List< ThirdParty> findByName(@PathVariable("name") String name) {
         return thirdPartyService.findByName(name);
     }
-
     //HashKey //TODO
-    @GetMapping(path = "/hashkey")
+    @GetMapping(path = "/key/{key}")
     @ResponseStatus(HttpStatus.OK)
-    public List<ThirdParty> findByHashKey(@RequestParam String hashedKey) {
+    public List<ThirdParty> findByHashKey(@PathVariable("key") String hashedKey) {
         return thirdPartyService.findByHashKey(hashedKey);
     }
 

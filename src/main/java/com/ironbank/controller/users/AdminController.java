@@ -1,5 +1,6 @@
 package com.ironbank.controller.users;
 
+import com.ironbank.model.users.AccountHolder;
 import com.ironbank.model.users.Admin;
 import com.ironbank.service.users.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +25,19 @@ public class AdminController {
         return adminService.findAll();
     }
 
-    //Id //TODO
-    @GetMapping(path = "/id")
+    @GetMapping(path = "/id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Admin findById(@RequestParam long id) {
+    public Admin findById(@PathVariable("id") long id) {
         return adminService.findById(id);
     }
 
-    //Name //TODO
-    @GetMapping(path = "/name")
+    //Name
+    @GetMapping(path = "/name/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Admin> findByName(@RequestParam String name) {
+    public List< Admin> findByName(@PathVariable("name") String name) {
         return adminService.findByName(name);
     }
+
 
 
     //POSTMAPPING

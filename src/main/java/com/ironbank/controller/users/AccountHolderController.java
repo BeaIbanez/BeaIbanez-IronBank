@@ -23,17 +23,17 @@ public class AccountHolderController {
         return accountHolderService.findAll();
     }
 
-    //Id //TODO
-    @GetMapping(path = "/id")
+    //Id
+    @GetMapping(path = "/id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public AccountHolder findById(@RequestParam long id) {
+    public AccountHolder findById(@PathVariable("id") long id) {
         return accountHolderService.findById(id);
     }
 
-    //Name //TODO
-    @GetMapping(path = "/name/")
+    //Name
+    @GetMapping(path = "/name/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public List< AccountHolder> findByName(@RequestParam String name) {
+    public List< AccountHolder> findByName(@PathVariable("name") String name) {
         return accountHolderService.findByName(name);
     }
 

@@ -100,4 +100,26 @@ public class CheckingController {
     }
 
 
+    //TODO
+/*    public Response sendMoney(
+            @RequestBody TransferBalanceRequest transferBalanceRequest
+    ) {
+
+        return Response.SC_OK().setPayload(
+                checkingService.sendMoney(
+                        transferBalanceRequest
+                )
+        );
+    }
+    @RequestMapping("/statement")
+    public Response getStatement(
+            @RequestBody AccountStatementRequest accountStatementRequest
+
+    ){
+        return Response.SC_OK().setPayload(
+                checkingService.getStatement(accountStatementRequest.getAccountNumber())
+        );
+
+    }*/
+
 }
