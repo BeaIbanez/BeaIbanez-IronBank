@@ -8,6 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -29,5 +31,4 @@ public class Accounts {
     private BigDecimal penaltyFee;
     private Date localDate;
     private Status status;
-
 }

@@ -20,7 +20,8 @@ public class SavingController {
 //GETMAPPING
 
     //All
-    @GetMapping(path = "/all")
+    @GetMapping (path = "/admin/all")
+    //TODO
     @ResponseStatus(HttpStatus.OK)
     public List<Saving> findAll() {
         return savingsService.findAll();

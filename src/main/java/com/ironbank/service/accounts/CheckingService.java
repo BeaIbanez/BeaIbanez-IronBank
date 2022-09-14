@@ -36,11 +36,6 @@ public interface CheckingService {
 
     Checking changeBalance(Long id, Checking balance);
 
-    Checking save(Checking checking);
-    Transaction sendMoney(
-            TransferBalanceRequest transferBalanceRequest
-    );
-    AccountStatement getStatement(String accountNumber);
 
-    Checking findByAccountNumberEquals(String primaryOwner);
+
 }

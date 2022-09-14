@@ -15,11 +15,14 @@ import java.math.BigDecimal;
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long transactionId;
+    private Long transferBalanceId;
 
-    private String primaryOwner;
+    private String fromAccountNumber;
 
-    private BigDecimal transactionAmount;
+    private String toAccountNumber;
 
+    private BigDecimal amount;
+
+    private TransactionType transactionType;
 
 }
