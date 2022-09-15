@@ -16,15 +16,12 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 
-public class Admin {
+public class Admin
+        /*extends User */
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    private String name;
-
-    public Admin(String name) {
-        this.name = name;
-    }
+private String name;
 }

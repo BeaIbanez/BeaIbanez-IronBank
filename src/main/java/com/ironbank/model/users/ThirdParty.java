@@ -13,7 +13,9 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ThirdParty {
+public class ThirdParty
+       /* extends User*/
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

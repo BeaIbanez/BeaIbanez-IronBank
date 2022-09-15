@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @Table
 @Entity
-public class Credit extends Accounts {
+public class Credit extends Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

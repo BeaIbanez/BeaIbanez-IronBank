@@ -1,6 +1,5 @@
 package com.ironbank.model.accounts;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +14,7 @@ import java.util.Date;
 @MappedSuperclass
 
 
-public class Accounts {
+public class Account {
     /*@Column(precision = 32, scale = 4)*/
     @AttributeOverrides({
             @AttributeOverride(name = "amount", column = @Column(name = "balance")),
