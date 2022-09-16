@@ -16,6 +16,7 @@ import java.util.Date;
 
 
 public class Account {
+
     @Id
     @Column(name = "id", nullable = false)
     private long id;
@@ -40,4 +41,9 @@ public class Account {
     private Date localDate;
     private Status status;
 
+/*    public static void monthlyFee(BigDecimal fee, BigDecimal balance){
+        balance = balance.add(fee);
+        Account.setBalance(balance);
+        System.out.println("It works");
+    }*/ //TODO InterestRate
 }
