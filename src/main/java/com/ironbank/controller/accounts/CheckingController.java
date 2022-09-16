@@ -4,6 +4,7 @@ import com.ironbank.model.accounts.Checking;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Status;
 import com.ironbank.service.accounts.CheckingService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,28 +26,28 @@ public class CheckingController {
     }
 
     //Id
-    @GetMapping(path = "/id")
+    @GetMapping(path = "/id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Checking> findById(@RequestParam long id) {
+    public Checking findById(@RequestParam Long id) {
         return checkingService.findById(id);
     }
 
     //Balance
-    @GetMapping(path = "/balance")
+    @GetMapping(path = "/balance/{balance}")
     @ResponseStatus(HttpStatus.OK)
     public List<Checking> findByBalance(@RequestParam Money balance) {
         return checkingService.findByBalance(balance);
     }
 
     //secretKey
-    @GetMapping(path = "/secretKey")
+    @GetMapping(path = "/secretKey/{secretKey}")
     @ResponseStatus(HttpStatus.OK)
     public List<Checking> findBySecretKey(@RequestParam String secretKey) {
         return checkingService.findBySecretKey(secretKey);
     }
 
     //primaryOwner
-    @GetMapping(path = "/primaryOwner")
+    @GetMapping(path = "/primaryOwner/{primaryOwner}")
     @ResponseStatus(HttpStatus.OK)
     public List<Checking> findByPrimaryOwner(@RequestParam String primaryOwner) {
         return checkingService.findByPrimaryOwner(primaryOwner);
@@ -60,7 +61,7 @@ public class CheckingController {
     }
 
     //status
-    @GetMapping(path = "/status")
+    @GetMapping(path = "/status/{status}")
     @ResponseStatus(HttpStatus.OK)
     public List<Checking> findByStatus(@RequestParam Status status) {
         return checkingService.findByStatus(status);
@@ -72,6 +73,7 @@ public class CheckingController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Checking create(@RequestBody Checking checking) {
+
         return checkingService.create(checking);
     }
 
@@ -95,31 +97,8 @@ public class CheckingController {
     //deleteAdmin
     @DeleteMapping("/id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteChecking(@PathVariable("id") long id) {
-        checkingService.deleteChecking(id);
+    public void delete(@PathVariable("id") Long id) {
+        checkingService.delete(id);
     }
-
-
-    //TODO
-/*    public Response sendMoney(
-            @RequestBody TransferBalanceRequest transferBalanceRequest
-    ) {
-
-        return Response.SC_OK().setPayload(
-                checkingService.sendMoney(
-                        transferBalanceRequest
-                )
-        );
-    }
-    @RequestMapping("/statement")
-    public Response getStatement(
-            @RequestBody AccountStatementRequest accountStatementRequest
-
-    ){
-        return Response.SC_OK().setPayload(
-                checkingService.getStatement(accountStatementRequest.getAccountNumber())
-        );
-
-    }*/
 
 }

@@ -12,6 +12,6 @@ public interface AccountHolderRepository extends JpaRepository<AccountHolder, Lo
 
       List<AccountHolder> findByName(String name);
 
-      AccountHolder findById(long id);
+
       List<AccountHolder> findByDateOfBirth(String birth);
 }

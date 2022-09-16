@@ -2,6 +2,7 @@ package com.ironbank.service;
 
 import com.ironbank.model.Transaction;
 import com.ironbank.model.TransactionType;
+import com.ironbank.model.accounts.Account;
 import com.ironbank.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -99,9 +100,5 @@ public class TransactionServiceImpl implements TransactionService {
         changeTo.getToAccountNumber();
         return repository.save(changeTo);
     }
-
-
-
-
 
 }

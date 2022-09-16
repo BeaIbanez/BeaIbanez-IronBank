@@ -9,8 +9,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table
-@MappedSuperclass
+
+@Entity
 public class Credit extends Account {
 
     @Id

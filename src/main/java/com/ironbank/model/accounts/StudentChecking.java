@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table
+
 @Entity
 public class StudentChecking extends Account {
 

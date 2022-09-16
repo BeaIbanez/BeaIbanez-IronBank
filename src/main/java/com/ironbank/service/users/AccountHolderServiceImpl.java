@@ -23,7 +23,9 @@ public class AccountHolderServiceImpl implements AccountHolderService {
 
     @Override
     public AccountHolder findById(long id) {
-        return repository.findById(id);
+        return repository.findById(id).orElseThrow(()
+                -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "AccountHolder with id " + id + "not found."));
     }
 
     @Override

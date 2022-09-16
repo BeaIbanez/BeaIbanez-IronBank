@@ -1,67 +1,98 @@
 package com.ironbank.service.accounts;
 
-import com.ironbank.model.accounts.Money;
-import com.ironbank.model.accounts.Saving;
-import com.ironbank.model.accounts.Status;
-import com.ironbank.model.accounts.StudentChecking;
+import com.ironbank.http.requestAccounts.TransferBalanceRequest;
+import com.ironbank.model.AccountStatement;
+import com.ironbank.model.accounts.*;
+import com.ironbank.repositories.accounts.SavingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transaction;
 import java.util.List;
 
 @Service
 public class SavingServiceImpl implements SavingService {
+    @Autowired
+    SavingRepository repository;
+
     @Override
     public List<Saving> findAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
-    public List<Saving> findById(long id) {
-        return null;
+    public Saving findById(long id) {
+        return repository.findById(id).orElseThrow(()
+                -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "Saving with id " + id + "not found."));
     }
-
     @Override
     public List<Saving> findByBalance(Money balance) {
-        return null;
+        return repository.findByBalance(balance);
     }
 
     @Override
     public List<Saving> findBySecretKey(String secretKey) {
-        return null;
+        return repository.findBySecretKey(secretKey);
     }
 
     @Override
     public List<Saving> findByPrimaryOwner(String primaryOwner) {
-        return null;
+        return repository.findByPrimaryOwner(primaryOwner);
     }
 
     @Override
     public Saving changeBalance(Long id, StudentChecking balance) {
-        return null;
+        Saving Saving = (Saving) findById(id);
+        var changedName = Saving;
+        changedName.setBalance(balance.getBalance());
+        return repository.save(changedName);
     }
 
     @Override
     public List<Saving> findByStatus(Status status) {
-        return null;
+        return repository.findByStatus(status);
     }
 
     @Override
-    public Saving create(Saving saving) {
-        return null;
+    public Saving create(Saving Saving) {
+        return repository.save(Saving);
     }
 
     @Override
     public Saving changePrimaryOwner(Long id, Saving primaryOwner) {
-        return null;
+        Saving Saving = (Saving) findById(id);
+        var changedName = Saving;
+        changedName.setPrimaryOwner(primaryOwner.getPrimaryOwner());
+        return repository.save(changedName);
     }
 
     @Override
-    public Saving upDateSaving(Long id, Saving saving) {
-        return null;
+    public Saving upDateSaving(Long id, Saving Saving) {
+        Saving upDateSaving = (Saving) findById(id);
+        var changedName = upDateSaving;
+        changedName.setPrimaryOwner(Saving.getPrimaryOwner());
+        return repository.save(changedName);
     }
 
     @Override
-    public void deleteSaving(long id) {
-
+    public void delete(long id) {
+        Saving SavingDel = new Saving();
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+        }
     }
+
+    @Override
+    public Saving changeBalance(Long id, Saving balance) {
+        Saving Saving = (Saving) findById(id);
+        var changedName = Saving;
+        changedName.setBalance(balance.getBalance());
+        return repository.save(changedName);
+    }
+
+
 }
+

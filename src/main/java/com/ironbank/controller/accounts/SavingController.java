@@ -20,7 +20,8 @@ public class SavingController {
 //GETMAPPING
 
     //All
-    @GetMapping(path = "/all")
+    @GetMapping (path = "/admin/all")
+
     @ResponseStatus(HttpStatus.OK)
     public List<Saving> findAll() {
         return savingsService.findAll();
@@ -29,7 +30,7 @@ public class SavingController {
     //Id
     @GetMapping(path = "/id")
     @ResponseStatus(HttpStatus.OK)
-    public List<Saving> findById(@RequestParam long id) {
+    public Saving findById(@RequestParam Long id) {
         return savingsService.findById(id);
     }
 
@@ -97,8 +98,8 @@ public class SavingController {
     //deleteAdmin
     @DeleteMapping("/id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteSaving(@PathVariable("id") long id) {
-        savingsService.deleteSaving(id);
+    public void delete(@PathVariable("id") Long id) {
+        savingsService.delete(id);
     }
 
 

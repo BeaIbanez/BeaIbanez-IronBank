@@ -28,7 +28,7 @@ public class CreditController {
     //Id
     @GetMapping(path = "/id")
     @ResponseStatus(HttpStatus.OK)
-    public List<Credit> findById(@RequestParam long id) {
+    public Credit findById(@RequestParam Long id) {
         return creditService.findById(id);
     }
 
@@ -97,8 +97,8 @@ public class CreditController {
     //deleteAdmin
     @DeleteMapping("/id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteCredit(@PathVariable("id") long id) {
-        creditService.deleteCredit(id);
+    public void delete(@PathVariable("id") Long id) {
+        creditService.delete(id);
     }
 
 

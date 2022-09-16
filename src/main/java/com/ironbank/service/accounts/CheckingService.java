@@ -1,46 +1,39 @@
 package com.ironbank.service.accounts;
 
-import com.ironbank.http.requestAccounts.TransferBalanceRequest;
-import com.ironbank.model.AccountStatement;
 import com.ironbank.model.accounts.Checking;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Status;
 
-import javax.transaction.Transaction;
 import java.util.List;
+import java.util.Optional;
 
 
 public interface CheckingService {
 
 
 
-    List<Checking> findAll();
+  List<Checking> findAll();
 
-    List<Checking> findById(long id);
+Checking findById(Long id);
 
-    List<Checking> findByBalance(Money balance);
+  List<Checking> findByBalance(Money balance);
 
-    List<Checking> findBySecretKey(String secretKey);
+  List<Checking> findBySecretKey(String secretKey);
 
-    List<Checking> findByPrimaryOwner(String primaryOwner);
+  List<Checking> findByPrimaryOwner(String primaryOwner);
 
-    List<Checking> findByStatus(Status status);
+  List<Checking> findByStatus(Status status);
 
-    Checking create(Checking checking);
+  Checking create(Checking checking);
 
-    Checking changePrimaryOwner(Long id, Checking primaryOwner);
+  Checking changePrimaryOwner(Long id, Checking primaryOwner);
 
-    Checking upDateChecking(Long id, Checking checking);
+  Checking upDateChecking(Long id, Checking checking);
 
-    void deleteChecking(long id);
+  void delete(Long id);
 
-    Checking changeBalance(Long id, Checking balance);
+  Checking changeBalance(Long id, Checking balance);
 
-    Checking save(Checking checking);
-    Transaction sendMoney(
-            TransferBalanceRequest transferBalanceRequest
-    );
-    AccountStatement getStatement(String accountNumber);
 
-    Checking findByAccountNumberEquals(String primaryOwner);
+
 }

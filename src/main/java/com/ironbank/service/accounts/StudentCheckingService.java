@@ -1,10 +1,13 @@
 package com.ironbank.service.accounts;
 
+import com.ironbank.http.requestAccounts.TransferBalanceRequest;
+import com.ironbank.model.AccountStatement;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Status;
 import com.ironbank.model.accounts.StudentChecking;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transaction;
 import java.util.List;
 
 
@@ -13,7 +16,7 @@ public interface StudentCheckingService {
 
     List<StudentChecking> findAll();
 
-    List<StudentChecking> findById(long id);
+    StudentChecking findById(long id);
 
     List<StudentChecking> findByBalance(Money balance);
 
@@ -29,7 +32,10 @@ public interface StudentCheckingService {
 
     StudentChecking upDateStudentChecking(Long id, StudentChecking studentChecking);
 
-    void deleteStudentChecking(long id);
+
+    void delete(Long id);
 
     StudentChecking changeBalance(Long id, StudentChecking balance);
+
+
 }

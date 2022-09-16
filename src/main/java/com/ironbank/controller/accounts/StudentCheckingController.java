@@ -27,7 +27,7 @@ public class StudentCheckingController {
     //Id
     @GetMapping(path = "/id")
     @ResponseStatus(HttpStatus.OK)
-    public List<StudentChecking> findById(@RequestParam long id) {
+    public StudentChecking findById(@RequestParam long id) {
         return studentCheckingService.findById(id);
     }
 
@@ -55,7 +55,7 @@ public class StudentCheckingController {
     //changeBalance
     @PatchMapping("/changebalance/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public StudentChecking changeBalance(@PathVariable Long id, @RequestBody StudentChecking balance) {
+    public StudentChecking changeBalance(@PathVariable long id, @RequestBody StudentChecking balance) {
         return studentCheckingService.changeBalance(id, balance);
     }
 
@@ -79,7 +79,7 @@ public class StudentCheckingController {
     //changeName
     @PatchMapping("/name/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public StudentChecking changePrimaryOwner(@PathVariable Long id, @RequestBody StudentChecking primaryOwner) {
+    public StudentChecking changePrimaryOwner(@PathVariable long id, @RequestBody StudentChecking primaryOwner) {
         return studentCheckingService.changePrimaryOwner(id, primaryOwner);
     }
 
@@ -87,7 +87,7 @@ public class StudentCheckingController {
     //upDateAdmin
     @PutMapping(path = "/checkingupdate/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public StudentChecking upDateStudentChecking(@PathVariable Long id, @RequestBody StudentChecking studentChecking) {
+    public StudentChecking upDateStudentChecking(@PathVariable long id, @RequestBody StudentChecking studentChecking) {
         return studentCheckingService.upDateStudentChecking(id, studentChecking);
     }
 
@@ -95,8 +95,8 @@ public class StudentCheckingController {
     //deleteAdmin
     @DeleteMapping("/id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteStudentChecking(@PathVariable("id") long id) {
-        studentCheckingService.deleteStudentChecking(id);
+    public void delete(@PathVariable("id") Long id) {
+        studentCheckingService.delete(id);
     }
 
 
