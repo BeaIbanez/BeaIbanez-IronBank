@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table
-@Entity
+@MappedSuperclass
 public class Credit extends Account {
 
     @Id

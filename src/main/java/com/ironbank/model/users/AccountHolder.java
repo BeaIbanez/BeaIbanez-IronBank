@@ -13,16 +13,16 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 public class AccountHolder
-      /*  extends User*/
+        extends User
 {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+        private long id;
         private String name;
         private String dateOfBirth;
         @Embedded
-        private Address Address;
+        private Address address;
         private String email;
 
        }

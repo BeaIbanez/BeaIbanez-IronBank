@@ -1,5 +1,6 @@
 package com.ironbank.model.accounts;
 
+import com.ironbank.model.users.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,10 +12,14 @@ import java.util.Date;
 @Getter
 @Setter
 @Table
-@MappedSuperclass
+@Entity
 
 
 public class Account {
+    @Id
+    @Column(name = "id", nullable = false)
+    private long id;
+
     /*@Column(precision = 32, scale = 4)*/
     @AttributeOverrides({
             @AttributeOverride(name = "amount", column = @Column(name = "balance")),
@@ -23,6 +28,12 @@ public class Account {
     @Embedded
     private Money balance;
     private String secretKey;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User owner;
+
+
     private String primaryOwner;
     private String secondaryOwner;
     private BigDecimal penaltyFee;

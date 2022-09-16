@@ -17,7 +17,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 
 public class Admin
-        /*extends User */
+        extends User
 {
 
     @Id

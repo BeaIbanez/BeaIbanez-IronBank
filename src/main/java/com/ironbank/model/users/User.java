@@ -1,26 +1,26 @@
 package com.ironbank.model.users;
 
+import com.ironbank.model.accounts.Account;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
+import java.util.List;
 
-@NoArgsConstructor
+
 @Getter
 @Setter
-@MappedSuperclass
+@Entity
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-   /* @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name = "account")*/
-    private String accounts;
+    @OneToMany(cascade={CascadeType.ALL})
+    @JoinColumn(name = "account")
+    private List<Account> accounts;
 
 
     private String name;
