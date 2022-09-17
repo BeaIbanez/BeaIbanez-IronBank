@@ -5,8 +5,11 @@ import com.ironbank.model.accounts.Account;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -21,11 +24,13 @@ public class User {
     @GeneratedValue()
     private long id;
 
-    public User(List<Account> accounts, List<Account> secondaryAccounts, String name) {
-        this.accounts = accounts;
-        this.secondaryAccounts = secondaryAccounts;
-        this.name = name;
-    }
+/*    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDate createDate;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDate modifyDate;*/
 
     @OneToMany(mappedBy = "primaryOwner", cascade={CascadeType.ALL} )
     @JsonIgnore

@@ -3,6 +3,7 @@ package com.ironbank.service;
 import com.ironbank.model.Transaction;
 import com.ironbank.model.accounts.Account;
 import com.ironbank.model.accounts.Money;
+import com.ironbank.model.accounts.Status;
 import com.ironbank.repositories.TransactionRepository;
 import com.ironbank.repositories.accounts.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,9 +71,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction create(Transaction transaction) {
-
+        bothAccountsActive(transaction); //TODO hacerlo bien
         validationAndProcess(transaction);
-        //TODO que las cuentas no esten FROZEN
+
         return repository.save(transaction);
     }
 
@@ -97,11 +98,24 @@ public class TransactionServiceImpl implements TransactionService {
             if (fromAccount.getBalance().getAmount().compareTo(fromAccount.getMinimumBalance().getAmount()) < 0) {
                 applyPenaltyFee(fromAccount);
             }
+
+
+
             accountRepository.saveAll(List.of(fromAccount, toAccount));
 
         }
     }
+    private void bothAccountsActive(Transaction transaction){
+        var account=new Account();
+        if (account.getStatus().equals(Status.ACTIVE)){
+            throw new ResponseStatusException(HttpStatus.ACCEPTED,
+                    "You're Account is ACTIVE, you can receive or pay a Transaction");
+        }else if (account.getStatus().equals(Status.FROZEN)){
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,
+                    "your Account is Frozen, you can't receive or pay a transaction  ");
+        }
 
+    }
     private void applyPenaltyFee(Account account) {
         account.setBalance(new Money((account.getBalance().getAmount().subtract(new BigDecimal(40))), account.getBalance().getCurrency()));
 
