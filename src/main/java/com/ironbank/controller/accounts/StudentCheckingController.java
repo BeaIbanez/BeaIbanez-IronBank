@@ -3,6 +3,7 @@ package com.ironbank.controller.accounts;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Status;
 import com.ironbank.model.accounts.StudentChecking;
+import com.ironbank.model.users.AccountHolder;
 import com.ironbank.service.accounts.StudentCheckingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,7 +49,7 @@ public class StudentCheckingController {
     //primaryOwner
     @GetMapping(path = "/primaryOwner")
     @ResponseStatus(HttpStatus.OK)
-    public List<StudentChecking> findByPrimaryOwner(@RequestParam String primaryOwner) {
+    public List<StudentChecking> findByPrimaryOwner(@RequestParam AccountHolder primaryOwner) {
         return studentCheckingService.findByPrimaryOwner(primaryOwner);
     }
 

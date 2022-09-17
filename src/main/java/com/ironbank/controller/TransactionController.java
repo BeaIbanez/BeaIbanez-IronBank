@@ -1,7 +1,6 @@
 package com.ironbank.controller;
 
 import com.ironbank.model.Transaction;
-import com.ironbank.model.TransactionType;
 import com.ironbank.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,25 +34,21 @@ public class TransactionController {
     @GetMapping(path = "/fromaccount/{fromAccountNumber}")
     @ResponseStatus(HttpStatus.OK)
     public Transaction fromAccountNumber(@PathVariable("fromAccountNumber") String fromAccountNumber) {
-        return transactionService.fromAccountNumber(fromAccountNumber);
+        return transactionService.fromAccount(fromAccountNumber);
     }
 
 
     @GetMapping(path = "/toaccount/{toAccountNumber}")
     @ResponseStatus(HttpStatus.OK)
     public Transaction toAccountNumber(@PathVariable("toAccountNumber") String toAccountNumber) {
-        return transactionService.toAccountNumber(toAccountNumber);
+        return transactionService.toAccount(toAccountNumber);
     }
     @GetMapping(path = "/nameFrom/{primaryOwnerFrom}")
     @ResponseStatus(HttpStatus.OK)
     public Transaction fromAccountName(@PathVariable("primaryOwnerFrom") String fromAccountName) {
         return transactionService.fromAccountName(fromAccountName);
     }
-    @GetMapping(path = "/nameFrom/{primaryOwnerTo}")
-    @ResponseStatus(HttpStatus.OK)
-    public Transaction toAccountName(@PathVariable("primaryOwnerTo") String toAccountName) {
-        return transactionService.toAccountName(toAccountName);
-    }
+
 
     @GetMapping(path = "/amount/{amount}")
     @ResponseStatus(HttpStatus.OK)
@@ -61,11 +56,7 @@ public class TransactionController {
         return transactionService.findByAmount(findByAmount);
     }
 
-    @GetMapping(path = "/transType/{transactionType}")
-    @ResponseStatus(HttpStatus.OK)
-    public Transaction findByTransactionType(@PathVariable("transactionType") TransactionType type) {
-        return transactionService.findByTransactionType(type);
-    }
+
 
 
     //POST

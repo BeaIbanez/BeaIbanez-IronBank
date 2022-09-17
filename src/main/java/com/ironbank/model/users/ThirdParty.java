@@ -13,12 +13,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ThirdParty
-        extends User
+
+public class ThirdParty extends User
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+
     private String name;
     private String hashedKey;
 

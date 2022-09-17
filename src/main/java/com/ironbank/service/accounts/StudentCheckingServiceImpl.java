@@ -1,17 +1,15 @@
 package com.ironbank.service.accounts;
 
-import com.ironbank.http.requestAccounts.TransferBalanceRequest;
-import com.ironbank.model.AccountStatement;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.StudentChecking;
 import com.ironbank.model.accounts.Status;
+import com.ironbank.model.users.AccountHolder;
 import com.ironbank.repositories.accounts.StudentCheckingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.transaction.Transaction;
 import java.util.List;
 
 @Service
@@ -41,19 +39,18 @@ public class StudentCheckingServiceImpl implements StudentCheckingService {
     }
 
     @Override
-    public List<StudentChecking> findByPrimaryOwner(String primaryOwner) {
+    public List<StudentChecking> findByPrimaryOwner(AccountHolder primaryOwner) {
         return repository.findByPrimaryOwner(primaryOwner);
     }
-
-
-
     @Override
     public List<StudentChecking> findByStatus(Status status) {
         return repository.findByStatus(status);
     }
 
     @Override
+
     public StudentChecking create(StudentChecking StudentChecking) {
+
         return repository.save(StudentChecking);
     }
 

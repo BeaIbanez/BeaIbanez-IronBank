@@ -1,13 +1,10 @@
 package com.ironbank.service.accounts;
 
-import com.ironbank.http.requestAccounts.TransferBalanceRequest;
-import com.ironbank.model.AccountStatement;
 import com.ironbank.model.accounts.Credit;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Status;
-import org.springframework.stereotype.Service;
+import com.ironbank.model.users.AccountHolder;
 
-import javax.transaction.Transaction;
 import java.util.List;
 
 
@@ -21,7 +18,7 @@ public interface CreditService {
 
     List<Credit> findBySecretKey(String secretKey);
 
-    List<Credit> findByPrimaryOwner(String primaryOwner);
+    List<Credit> findByPrimaryOwner(AccountHolder primaryOwner);
 
     List<Credit> findByStatus(Status status);
 

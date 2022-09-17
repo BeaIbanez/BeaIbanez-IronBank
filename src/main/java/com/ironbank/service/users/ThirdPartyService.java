@@ -15,8 +15,6 @@ public interface ThirdPartyService {
 
     List<ThirdParty> findByName(String name);
 
-    List<ThirdParty> findByHashKey(String hashedKey);
-
 
     ThirdParty upDateThirdParty(Long id, ThirdParty thirdParty);
 
@@ -25,6 +23,8 @@ public interface ThirdPartyService {
     ThirdParty create(ThirdParty thirdParty);
 
     void deleteAdmin(long id);
+
+    List<ThirdParty> findByHashedKey(String hashedKey);
 
 
     ;

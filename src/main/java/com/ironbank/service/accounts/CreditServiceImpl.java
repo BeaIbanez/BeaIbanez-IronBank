@@ -1,18 +1,16 @@
 package com.ironbank.service.accounts;
 
-import com.ironbank.http.requestAccounts.TransferBalanceRequest;
-import com.ironbank.model.AccountStatement;
-import com.ironbank.model.accounts.Checking;
 import com.ironbank.model.accounts.Credit;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Status;
+import com.ironbank.model.users.AccountHolder;
 import com.ironbank.repositories.accounts.CreditRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.transaction.Transaction;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -45,7 +43,7 @@ public class CreditServiceImpl implements CreditService {
     }
 
     @Override
-    public List<Credit> findByPrimaryOwner(String primaryOwner) {
+    public List<Credit> findByPrimaryOwner(AccountHolder primaryOwner) {
         return repository.findByPrimaryOwner(primaryOwner);
     }
 
@@ -102,7 +100,18 @@ public class CreditServiceImpl implements CreditService {
         return repository.save(changedName);
     }
 
+    //MONTHLY
+    private LocalDate addedInterestRate; //Methodo accedes al balance, tbien
+    // te dice desde la creatiion date ha pasado un año? si ha pasado un año, sumar
+    //TODO desde la creacion ha pasado un año, si es asi, se
+    /*var today= localdate.now*/
 
+    //METHODO
+    //primero mirar creationdate, add.interest rate a la cuenta, seteas fecha =localdate.now
+    //If (creationDate.compararcontoday==1){
+    //se le suma interestRate al balance, seteas addInterestRateDate =localdate.now
+    //Else if (addInterestRateDate.compararcon.today==1)
+    //se le suma interestRate al balance, seteas addInterestRateDate =localdate.now
 
 }
 

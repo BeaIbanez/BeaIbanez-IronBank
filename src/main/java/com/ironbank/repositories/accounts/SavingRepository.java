@@ -4,6 +4,7 @@ import com.ironbank.model.accounts.Credit;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Saving;
 import com.ironbank.model.accounts.Status;
+import com.ironbank.model.users.AccountHolder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +21,7 @@ public interface SavingRepository extends JpaRepository<Saving, Long> {
 
     List<Saving> findBySecretKey(String secretKey);
 
-    List<Saving> findByPrimaryOwner(String primaryOwner);
+    List<Saving> findByPrimaryOwner(AccountHolder primaryOwner);
 
     List<Saving> findByStatus(Status status);
     void delete(Saving entity);

@@ -4,6 +4,7 @@ import com.ironbank.model.accounts.Checking;
 import com.ironbank.model.accounts.Credit;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Status;
+import com.ironbank.model.users.AccountHolder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,7 @@ public interface CreditRepository extends JpaRepository<Credit, Long> {
 
       List<Credit> findBySecretKey(String secretKey);
 
-      List<Credit> findByPrimaryOwner(String primaryOwner);
+      List<Credit> findByPrimaryOwner(AccountHolder primaryOwner);
 
       List<Credit> findByStatus(Status status);
       void delete(Credit entity);

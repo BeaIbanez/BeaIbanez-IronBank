@@ -1,7 +1,6 @@
 package com.ironbank.repositories;
 
 import com.ironbank.model.Transaction;
-import com.ironbank.model.TransactionType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigDecimal;
@@ -9,11 +8,10 @@ import java.math.BigDecimal;
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
 
-    Transaction fromAccountNumber(String fromAccountNumber);
+    Transaction fromAccount(String fromAccount);
 
-    Transaction toAccountNumber(String toAccountNumber);
+    Transaction toAccount(String toAccount);
 
-    Transaction findByTransactionType(TransactionType transactionType);
 
     Transaction findByAmount(BigDecimal amount);
 

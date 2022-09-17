@@ -1,29 +1,27 @@
 package com.ironbank.service.accounts;
 
 
-import com.ironbank.http.requestAccounts.TransferBalanceRequest;
-import com.ironbank.model.AccountStatement;
-import com.ironbank.model.accounts.Checking;
-import com.ironbank.model.accounts.Money;
-import com.ironbank.model.accounts.Status;
+import com.ironbank.model.accounts.*;
 
-import com.ironbank.model.accounts.StudentChecking;
+import com.ironbank.model.users.AccountHolder;
 import com.ironbank.repositories.accounts.CheckingRepository;
-import com.ironbank.repositories.accounts.StudentCheckingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.transaction.Transaction;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CheckingServiceImpl implements CheckingService {
 
     @Autowired
     CheckingRepository repository;
+    @Autowired
+    StudentCheckingService studentCheckingService;
 
     @Override
     public List<Checking> findAll() {
@@ -48,7 +46,7 @@ public class CheckingServiceImpl implements CheckingService {
     }
 
     @Override
-    public List<Checking> findByPrimaryOwner(String primaryOwner) {
+    public List<Checking> findByPrimaryOwner(AccountHolder primaryOwner) {
         return repository.findByPrimaryOwner(primaryOwner);
     }
 
@@ -58,7 +56,20 @@ public class CheckingServiceImpl implements CheckingService {
     }
 
     @Override
-    public Checking create(Checking checking) {
+    public Account create(Checking checking) {
+
+        var accountHolderDOB= checking.getPrimaryOwner().getDateOfBirth();
+        var date= LocalDate.now();
+        var difAge= ChronoUnit.YEARS.between(accountHolderDOB, date);
+
+        var studentCheck= new StudentChecking (checking.getBalance(),checking.getSecretKey(),checking.getPrimaryOwner(),checking.getMinimumBalance(),
+        checking.getSecondaryOwner(),checking.getPenaltyFee(),checking.getLocalDate(),checking.getStatus(),checking.getFromTransactions(),checking.getToTransactions());
+
+        if(difAge < 24){
+
+                    return studentCheckingService.create(studentCheck);
+                }
+
         return repository.save(checking);
     }
 

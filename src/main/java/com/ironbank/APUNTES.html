@@ -5,16 +5,49 @@
     <title>APUNTES</title>
 
 
-    <P>Dponde poner los methodos de Transaction</P>
 
+// Sábado 17/09/2022
 
     <p>//METHODS FOR THE LOGIC FUNCTIONALITIES</p>
-    <p> //Create an Account (+24 checking, - 24 studentChecking)
-    //Hacer una transferencia y que se guarde en la tabla
-    //income(diners que entren a una compta) y charge(diners que surten d'una compta) / Dos atributos nuevos.
-    //Fer comprobació de fer dos booleans y si els dos son TRUE(income, charge) que se haga la tranferencia, sino no.
-    // Que chekee si tienes dinero suficiente para realizar la transferencia
-    // Assignar cuenta a usuario</p>
+
+Methodos Transaction
+
+        1. //Methodo sendMoney //Hacer una transferencia y que se guarde en la tabla
+            1.1 Checkear que hay dinero en la cuenta FromAccountNumber(Balance).
+        2. //Methodo Statement //Que se vea en la tabla como queda las cuentas despues de hacer transfer  DONE
+
+
+Methodos ACCOUNTS
+        Saving -->  interest rate of 0.0025 - maximum interest rate of 0.5
+                    minimumBalance of 1000- minimum balance of less than 1000 but no lower than 100 DONE
+
+        CreditAccount --> creditLimit of 100 - instantiated with a creditLimit higher than 100 but not higher than 100000 DONE
+                           interestRate of 0.2 - interestRate less than 0.2 but not lower than 0.1 DONE
+
+        CheckingAccounts=StudentAccount --> Create an Account (+24 checking, - 24 studentChecking) DONE
+                                minimumBalance of 250 and a monthlyMaintenanceFee of 12 DONE
+
+___________________________________DONEDONEDONE__________________________________________________________________________________________________
+
+Methods PenaltyFee
+        --> The penaltyFee for all accounts (that have this attribute) should be 40. --DONE--
+        --> automatically -- drops below the minimumBalance, the penaltyFee should be deducted
+
+Methods Interest Rate
+        --> check antiguitat everyAccount 1month or more, balance+ interestRate
+        --> 1 año el interes anual dividirlo entre 12 para que salga el mensual
+
+
+INTEGRAR KEYCLOAK
+
+        Saving Model -> @Transient, no me deja poner @Embeded con el money. -- DONE
+
+FALTA:
+    ThirdParty
+    InterestRate
+    Security
+    ValidacionesTransactions
+    Test
 
 </head>
 <body>

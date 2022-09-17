@@ -1,12 +1,16 @@
 package com.ironbank.model;
 
+import com.ironbank.model.accounts.Account;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,27 +21,23 @@ public class Transaction {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "transferId")
+    @Column(name = "transfer_id")
     private String transferId;
 
-    /*@Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "SEQNO", unique = true, nullable = false)
-    public Integer getSeqno() {
-        return this.seqno;
-    }*/
-
-    private String fromAccountNumber;
-
-    private String toAccountNumber;
-
+    @ManyToOne
+    private Account fromAccount;
+    @ManyToOne
+    private Account toAccount;
     private BigDecimal amount;
-
-    private TransactionType transactionType;
-
     private String fromAccountName;
-
     private String toAccountName;
-    private Long income;
-    private Long charge;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+       private LocalDate createDate;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDate modifyDate;
+
 }

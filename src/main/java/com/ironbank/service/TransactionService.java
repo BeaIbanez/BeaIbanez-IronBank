@@ -1,7 +1,6 @@
 package com.ironbank.service;
 
 import com.ironbank.model.Transaction;
-import com.ironbank.model.TransactionType;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,8 +10,8 @@ public interface TransactionService {
 
     List<Transaction> findAll();
     Transaction findById(long transferBalanceId);
-    Transaction fromAccountNumber(String fromAccountNumber);
-    Transaction toAccountNumber(String toAccountNumber);
+    Transaction fromAccount(String fromAccount);
+    Transaction toAccount(String toAccount);
 
     //NAME
     Transaction fromAccountName(String fromAccountName);
@@ -20,8 +19,6 @@ public interface TransactionService {
     Transaction toAccountName(String toAccountName);
 
     Transaction findByAmount(BigDecimal amount);
-    Transaction findByTransactionType (TransactionType transactionType);
-
 
     void deleteTransaction(long transferBalanceId);
 

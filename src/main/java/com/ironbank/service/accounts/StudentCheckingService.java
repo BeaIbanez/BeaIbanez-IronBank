@@ -1,13 +1,10 @@
 package com.ironbank.service.accounts;
 
-import com.ironbank.http.requestAccounts.TransferBalanceRequest;
-import com.ironbank.model.AccountStatement;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Status;
 import com.ironbank.model.accounts.StudentChecking;
-import org.springframework.stereotype.Service;
+import com.ironbank.model.users.AccountHolder;
 
-import javax.transaction.Transaction;
 import java.util.List;
 
 
@@ -22,7 +19,7 @@ public interface StudentCheckingService {
 
     List<StudentChecking> findBySecretKey(String secretKey);
 
-    List<StudentChecking> findByPrimaryOwner(String primaryOwner);
+    List<StudentChecking> findByPrimaryOwner(AccountHolder primaryOwner);
 
     List<StudentChecking> findByStatus(Status status);
 

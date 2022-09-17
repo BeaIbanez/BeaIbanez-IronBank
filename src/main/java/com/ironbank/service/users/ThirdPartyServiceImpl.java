@@ -34,10 +34,6 @@ public class ThirdPartyServiceImpl implements ThirdPartyService {
         return repository.findByName(name);
     }
 
-    @Override //TODO
-    public List<ThirdParty> findByHashKey(String hashedKey) {
-        return null;
-    }
 
     @Override
     public ThirdParty upDateThirdParty(Long id, ThirdParty thirdParty) {
@@ -67,5 +63,10 @@ public class ThirdPartyServiceImpl implements ThirdPartyService {
         if (repository.existsById(id)) {
             repository.deleteById(id);
         }
+    }
+
+    @Override
+    public List<ThirdParty> findByHashedKey(String hashedKey) {
+        return repository.findByHashedKey(hashedKey);
     }
 }

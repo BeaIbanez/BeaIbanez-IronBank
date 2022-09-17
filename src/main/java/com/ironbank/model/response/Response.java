@@ -30,12 +30,6 @@ public class Response<T> {
     private Object errors;
     private Object metadata;
 
-    // TODO
- /*   public static <T> Response<T> SC_OK() {
-        Response<T> response = new Response<>();
-        response.setStatus(Status.SC_OK);
-        return response;
-    }*/
 
     public static <T> Response<T> badRequest() {
         Response<T> response = new Response<>();

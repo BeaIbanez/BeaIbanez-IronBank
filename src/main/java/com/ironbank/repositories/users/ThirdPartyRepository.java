@@ -12,4 +12,5 @@ public interface ThirdPartyRepository extends JpaRepository<ThirdParty, Long> {
 
       List<ThirdParty> findByName(String name);
 
+    List<ThirdParty> findByHashedKey(String hashedKey);
 }

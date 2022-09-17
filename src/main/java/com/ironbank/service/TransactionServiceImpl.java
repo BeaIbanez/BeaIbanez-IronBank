@@ -1,9 +1,10 @@
 package com.ironbank.service;
 
 import com.ironbank.model.Transaction;
-import com.ironbank.model.TransactionType;
 import com.ironbank.model.accounts.Account;
+import com.ironbank.model.accounts.Money;
 import com.ironbank.repositories.TransactionRepository;
+import com.ironbank.repositories.accounts.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
     TransactionRepository repository;
+    @Autowired
+    AccountRepository accountRepository;
 
     @Override
     public List<Transaction> findAll() {
@@ -30,17 +33,18 @@ public class TransactionServiceImpl implements TransactionService {
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "Transaction with id " + id + "not found."));
     }
-//NUMBER
+
     @Override
-    public Transaction fromAccountNumber(String fromAccountNumber) {
-        return repository.fromAccountNumber(fromAccountNumber);
+    public Transaction fromAccount(String fromAccount) {
+        return repository.fromAccount(fromAccount);
     }
 
     @Override
-    public Transaction toAccountNumber(String toAccountNumber) {
-        return repository.toAccountNumber(toAccountNumber);
+    public Transaction toAccount(String toAccount) {
+        return repository.toAccount(toAccount);
     }
-//NAME
+
+    //NAME
     @Override
     public Transaction fromAccountName(String fromAccountName) {
         return repository.fromAccountName(fromAccountName);
@@ -57,13 +61,6 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction findByTransactionType(TransactionType transactionType) {
-        return repository.findByTransactionType(transactionType);
-    }
-
-
-
-    @Override
     public void deleteTransaction(long transferBalanceId) {
         Transaction trans = new Transaction();
         if (repository.existsById(transferBalanceId)) {
@@ -73,10 +70,43 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction create(Transaction transaction) {
-        System.out.println(transaction);
-        var result= repository.save(transaction);
-        return result;
+
+        validationAndProcess(transaction);
+        //TODO que las cuentas no esten FROZEN
+        return repository.save(transaction);
     }
+
+    //VALIDATION IF NOT HAVE ENOUGH MONEY
+    private void validationAndProcess(Transaction transaction) {
+        var fromAccount = transaction.getFromAccount();
+        var toAccount = transaction.getToAccount();
+        if (fromAccount.getBalance().getAmount().compareTo(transaction.getAmount()) < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Not have enough Money for the transaction");
+        } else {
+            var fromBalance = fromAccount.getBalance().getAmount().subtract(transaction.getAmount());
+            fromAccount.setBalance(new Money((fromBalance), fromAccount.getBalance().getCurrency()));
+
+            var toBalance = toAccount.getBalance().getAmount().add(transaction.getAmount());
+            toAccount.setBalance(new Money((toBalance), toAccount.getBalance().getCurrency()));
+
+            if (toAccount.getBalance().getAmount().compareTo(toAccount.getMinimumBalance().getAmount()) < 0) {
+                applyPenaltyFee(toAccount);
+            }
+
+            if (fromAccount.getBalance().getAmount().compareTo(fromAccount.getMinimumBalance().getAmount()) < 0) {
+                applyPenaltyFee(fromAccount);
+            }
+            accountRepository.saveAll(List.of(fromAccount, toAccount));
+
+        }
+    }
+
+    private void applyPenaltyFee(Account account) {
+        account.setBalance(new Money((account.getBalance().getAmount().subtract(new BigDecimal(40))), account.getBalance().getCurrency()));
+
+    }
+
 
     @Override
     public Transaction changeAmount(Long id, Transaction amount) {
@@ -85,11 +115,12 @@ public class TransactionServiceImpl implements TransactionService {
         changeAmount.setAmount(amount.getAmount());
         return repository.save(changeAmount);
     }
+
     @Override
-    public Transaction changeFromAccountNumber(Long transferBalanceId, Transaction fromAccountNumber) {
+    public Transaction changeFromAccountNumber(Long transferBalanceId, Transaction fromAccount) {
         Transaction trans = findById(transferBalanceId);
         var changeFrom = trans;
-        changeFrom.setFromAccountNumber(fromAccountNumber.getFromAccountNumber());
+        changeFrom.setFromAccount(fromAccount.getFromAccount());
         return repository.save(changeFrom);
     }
 
@@ -97,8 +128,9 @@ public class TransactionServiceImpl implements TransactionService {
     public Transaction changeToAccountNumber(Long transferBalanceId, Transaction toAccountNumber) {
         Transaction trans = findById(transferBalanceId);
         var changeTo = trans;
-        changeTo.getToAccountNumber();
+        changeTo.getToAccount();
         return repository.save(changeTo);
     }
 
 }
+

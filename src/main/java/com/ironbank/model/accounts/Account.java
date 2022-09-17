@@ -1,27 +1,37 @@
 package com.ironbank.model.accounts;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ironbank.model.Transaction;
+import com.ironbank.model.users.AccountHolder;
 import com.ironbank.model.users.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+
 @NoArgsConstructor
 @Getter
 @Setter
-@Table
+@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
-
 
 public class Account {
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue()
     private long id;
 
-    /*@Column(precision = 32, scale = 4)*/
     @AttributeOverrides({
             @AttributeOverride(name = "amount", column = @Column(name = "balance")),
             @AttributeOverride(name = "currency", column = @Column(name = "balance_currency"))
@@ -31,19 +41,53 @@ public class Account {
     private String secretKey;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User owner;
+    @JoinColumn(name = "primary_owner")
+    private AccountHolder primaryOwner;
 
+    @AttributeOverrides({
+            @AttributeOverride(name = "amount", column = @Column(name = "minimum_balance")),
+            @AttributeOverride(name = "currency", column = @Column(name = "minimum_balance_currency"))
+    })    @Embedded
+    @DecimalMin(value = "100", message = "Should be more than 100")
+    @DecimalMax(value = "1000", message = "Should be less than 1000")
+    private Money minimumBalance;
 
-    private String primaryOwner;
-    private String secondaryOwner;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
+    private AccountHolder secondaryOwner;
+
+    @Digits(integer = 40, fraction = 0)
     private BigDecimal penaltyFee;
+
     private Date localDate;
     private Status status;
 
-/*    public static void monthlyFee(BigDecimal fee, BigDecimal balance){
-        balance = balance.add(fee);
-        Account.setBalance(balance);
-        System.out.println("It works");
-    }*/ //TODO InterestRate
+
+    @OneToMany(mappedBy = "fromAccount", cascade = {CascadeType.ALL})
+    @JsonIgnore
+    private List<Transaction> fromTransactions;
+
+    @OneToMany(mappedBy = "toAccount", cascade = {CascadeType.ALL})
+    @JsonIgnore
+    private List<Transaction> toTransactions;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDate createDate;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDate modifyDate;
+    public Account(Money balance, String secretKey, AccountHolder primaryOwner, Money minimumBalance, AccountHolder secondaryOwner, BigDecimal penaltyFee, Date localDate, Status status, List<Transaction> fromTransactions, List<Transaction> toTransactions) {
+        this.balance = balance;
+        this.secretKey = secretKey;
+        this.primaryOwner = primaryOwner;
+        this.minimumBalance = minimumBalance;
+        this.secondaryOwner = secondaryOwner;
+        this.penaltyFee = penaltyFee;
+        this.localDate = localDate;
+        this.status = status;
+        this.fromTransactions = fromTransactions;
+        this.toTransactions = toTransactions;
+    }
 }

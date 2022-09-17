@@ -1,8 +1,10 @@
 package com.ironbank.controller.accounts;
 
+import com.ironbank.model.accounts.Account;
 import com.ironbank.model.accounts.Checking;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Status;
+import com.ironbank.model.users.AccountHolder;
 import com.ironbank.service.accounts.CheckingService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,7 @@ public class CheckingController {
     //primaryOwner
     @GetMapping(path = "/primaryOwner/{primaryOwner}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Checking> findByPrimaryOwner(@RequestParam String primaryOwner) {
+    public List<Checking> findByPrimaryOwner(@RequestParam AccountHolder primaryOwner) {
         return checkingService.findByPrimaryOwner(primaryOwner);
     }
     //PATCHMAPPING
@@ -72,7 +74,7 @@ public class CheckingController {
     //create
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Checking create(@RequestBody Checking checking) {
+    public Account create(@RequestBody Checking checking) {
 
         return checkingService.create(checking);
     }

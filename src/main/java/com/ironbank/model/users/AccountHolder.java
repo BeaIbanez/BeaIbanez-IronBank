@@ -6,21 +6,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
 @AllArgsConstructor
+
 public class AccountHolder
         extends User
 {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private long id;
         private String name;
-        private String dateOfBirth;
+        private LocalDate dateOfBirth;
         @Embedded
         private Address address;
         private String email;

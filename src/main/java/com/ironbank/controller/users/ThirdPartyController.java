@@ -36,11 +36,11 @@ public class ThirdPartyController {
     public List< ThirdParty> findByName(@PathVariable("name") String name) {
         return thirdPartyService.findByName(name);
     }
-    //HashKey //TODO
+
     @GetMapping(path = "/key/{key}")
     @ResponseStatus(HttpStatus.OK)
-    public List<ThirdParty> findByHashKey(@PathVariable("key") String hashedKey) {
-        return thirdPartyService.findByHashKey(hashedKey);
+    public List<ThirdParty> findByHashedKey(@PathVariable("key") String hashedKey) {
+        return thirdPartyService.findByHashedKey(hashedKey);
     }
 
     //POSTMAPPING

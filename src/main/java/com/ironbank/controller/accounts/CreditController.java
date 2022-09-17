@@ -3,6 +3,7 @@ package com.ironbank.controller.accounts;
 import com.ironbank.model.accounts.Credit;
 import com.ironbank.model.accounts.Money;
 import com.ironbank.model.accounts.Status;
+import com.ironbank.model.users.AccountHolder;
 import com.ironbank.service.accounts.CreditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,7 +50,7 @@ public class CreditController {
     //primaryOwner
     @GetMapping(path = "/primaryOwner")
     @ResponseStatus(HttpStatus.OK)
-    public List<Credit> findByPrimaryOwner(@RequestParam String primaryOwner) {
+    public List<Credit> findByPrimaryOwner(@RequestParam AccountHolder primaryOwner) {
         return creditService.findByPrimaryOwner(primaryOwner);
     }
 
