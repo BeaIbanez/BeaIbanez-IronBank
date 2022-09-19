@@ -1,23 +1,25 @@
 package com.ironbank.model.accounts;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Value;
+import com.ironbank.model.Transaction;
+import com.ironbank.model.users.AccountHolder;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
 
 
 public class Checking extends Account {
-
 
     @AttributeOverrides({
             @AttributeOverride(name = "amount", column = @Column(name = "monthly_maitenance_fee")),

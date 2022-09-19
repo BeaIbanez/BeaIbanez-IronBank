@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
+
 
 public class AccountHolder
         extends User
@@ -24,4 +24,12 @@ public class AccountHolder
         private Address address;
         private String email;
 
-       }
+        public AccountHolder(String name, LocalDate dateOfBirth, Address address, String email) {
+                this.name = name;
+                this.dateOfBirth = dateOfBirth;
+                this.address = address;
+                this.email = email;
+        }
+
+
+}

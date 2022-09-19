@@ -14,13 +14,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
 
 public class Admin
         extends User
 {
 
+    public Admin(String name) {
+        this.name = name;
+    }
 
-    private long id;
-private String name;
+    private String name;
+
+
+
 }

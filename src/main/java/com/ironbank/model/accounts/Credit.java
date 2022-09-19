@@ -1,5 +1,8 @@
 package com.ironbank.model.accounts;
 
+import com.ironbank.model.Transaction;
+import com.ironbank.model.users.AccountHolder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,11 +13,15 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
 
 @NoArgsConstructor
 @Getter
 @Setter
-
+@AllArgsConstructor
 @Entity
 public class Credit extends Account {
 
