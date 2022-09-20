@@ -104,7 +104,7 @@ public class CreditServiceImpl implements CreditService {
     private LocalDate addedInterestRate; //Methodo accedes al b5 minalance, tbien
     // te dice desde la creatiion date ha pasado un año? si ha pasado un año, sumar
     //TODO desde la creacion ha pasado un año, si es asi, se
-    /*var today= localdate.now*/
+    //var today= localdate.now
 
     //METHODO
     //primero mirar creationdate, add.interest rate a la cuenta, seteas fecha =localdate.now
