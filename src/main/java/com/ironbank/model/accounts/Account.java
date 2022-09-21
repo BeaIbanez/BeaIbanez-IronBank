@@ -86,10 +86,10 @@ public class Account {
 
 /*    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate createDate;
+    private LocalDate createDate;*/
 
-    @UpdateTimestamp
+  /*  @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate modifyDate;*/
-
+    private LocalDate modifyDate;
+*/
 }

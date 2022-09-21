@@ -47,6 +47,13 @@ public class AdminServiceImpl implements AdminService {
         return repository.save(changedName);
 
     }
+    @Override
+    public Admin upDateAdmin(Long id, Admin admin) {
+        Admin ad = (Admin) findById(id);
+        var changeAdmin = ad;
+        changeAdmin.setName(admin.getName());
+        return repository.save(changeAdmin);
+    }
 
     @Override
     public void deleteAdmin(long id) {

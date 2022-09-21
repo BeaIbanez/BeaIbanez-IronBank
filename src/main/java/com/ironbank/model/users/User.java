@@ -24,7 +24,7 @@ public class User {
     @GeneratedValue()
     private long id;
 
-/*    @CreationTimestamp
+   /* @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDate createDate;
 

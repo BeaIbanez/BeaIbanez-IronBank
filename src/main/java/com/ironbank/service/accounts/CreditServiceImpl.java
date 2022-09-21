@@ -2,15 +2,19 @@ package com.ironbank.service.accounts;
 
 import com.ironbank.model.accounts.Credit;
 import com.ironbank.model.accounts.Money;
+import com.ironbank.model.accounts.Saving;
 import com.ironbank.model.accounts.Status;
 import com.ironbank.model.users.AccountHolder;
 import com.ironbank.repositories.accounts.CreditRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -27,10 +31,10 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public Credit findById(Long id) {
-            return repository.findById(id).orElseThrow(()
-                    -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Credit with id " + id + "not found."));
-        }
+        return repository.findById(id).orElseThrow(()
+                -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "Credit with id " + id + "not found."));
+    }
 
     @Override
     public List<Credit> findByBalance(Money balance) {
@@ -89,8 +93,12 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public Credit upDateCredit(Long id, Credit credit) {
-        return null;
+        Credit upDateCredit = (Credit) findById(id);
+        var changeCredit = upDateCredit;
+        changeCredit.setBalance(credit.getBalance());
+        return repository.save(changeCredit);
     }
+
 
     @Override
     public Credit changeBalance(long id, Credit balance) {
@@ -100,18 +108,9 @@ public class CreditServiceImpl implements CreditService {
         return repository.save(changedName);
     }
 
-    //MONTHLY
-    private LocalDate addedInterestRate; //Methodo accedes al b5 minalance, tbien
-    // te dice desde la creatiion date ha pasado un año? si ha pasado un año, sumar
-    //TODO desde la creacion ha pasado un año, si es asi, se
-    //var today= localdate.now
 
-    //METHODO
-    //primero mirar creationdate, add.interest rate a la cuenta, seteas fecha =localdate.now
-    //If (creationDate.compararcontoday==1){
-    //se le suma interestRate al balance, seteas addInterestRateDate =localdate.now
-    //Else if (addInterestRateDate.compararcon.today==1)
-    //se le suma interestRate al balance, seteas addInterestRateDate =localdate.now
 
-}
+    }
+
+
 

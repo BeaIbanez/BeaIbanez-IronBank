@@ -1,9 +1,6 @@
 package com.ironbank.model.users;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,20 +9,20 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 
 
 public class AccountHolder
         extends User
 {
 
-        private String name;
         private LocalDate dateOfBirth;
         @Embedded
         private Address address;
         private String email;
 
-        public AccountHolder(String name, LocalDate dateOfBirth, Address address, String email) {
-                this.name = name;
+        public AccountHolder( LocalDate dateOfBirth, Address address, String email) {
+
                 this.dateOfBirth = dateOfBirth;
                 this.address = address;
                 this.email = email;

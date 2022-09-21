@@ -16,18 +16,21 @@ public class HelloController {
         return ResponseEntity.ok("Hello public user");
     }
 
-    @GetMapping("/member/hello")
+
+
+    @GetMapping("/members/hello")
     public ResponseEntity<String> helloMember(Principal principal) {
+
         return ResponseEntity.ok("Hello dear member" + principal.getName());
     }
 
-    @GetMapping("/moderator/hello")
+    @GetMapping("/s/hello")
     public ResponseEntity<String> helloModerator() {
         return ResponseEntity.ok("Hello Moderator");
     }
 
 
-    @GetMapping("/admin/hello")
+    @GetMapping("/admins/hello")
     public ResponseEntity<String> helloAdmin() {
         return ResponseEntity.ok("Nice day, admin");
     }

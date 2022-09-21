@@ -71,11 +71,12 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction create(Transaction transaction) {
-        bothAccountsActive(transaction); //TODO hacerlo bien
-/*
-        validationAndProcess(transaction);
-*/
 
+        //Validation
+        bothAccountsActive(transaction);
+        validationAndProcess(transaction);
+
+        //Saving new Account
         return repository.save(transaction);
     }
 
@@ -101,19 +102,12 @@ public class TransactionServiceImpl implements TransactionService {
                 applyPenaltyFee(fromAccount);
             }
 
-
-
             accountRepository.saveAll(List.of(fromAccount, toAccount));
 
         }
     }
     private void bothAccountsActive(Transaction transaction){
-        var account=new Account();
-        if (account.getStatus().equals(Status.ACTIVE)){
-            throw new ResponseStatusException(HttpStatus.ACCEPTED,
-                    "You're Account is ACTIVE, you can receive or pay a Transaction");
-            //validationAndProcess(transaction); TODO si esta ACTIVE hacer methodo validation and process
-        }else if (account.getStatus().equals(Status.FROZEN)){
+        if(!transaction.getToAccount().getStatus().equals(Status.ACTIVE) || !transaction.getFromAccount().getStatus().equals(Status.ACTIVE)){
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,
                     "your Account is Frozen, you can't receive or pay a transaction  ");
         }
@@ -121,7 +115,6 @@ public class TransactionServiceImpl implements TransactionService {
     }
     private void applyPenaltyFee(Account account) {
         account.setBalance(new Money((account.getBalance().getAmount().subtract(new BigDecimal(40))), account.getBalance().getCurrency()));
-
     }
 
 

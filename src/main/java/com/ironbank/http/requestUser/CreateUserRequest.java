@@ -12,4 +12,6 @@ public class CreateUserRequest {
     String email;
     String firstname;
     String lastname;
+    String primaryAddress;
+    String phoneNumber;
 }

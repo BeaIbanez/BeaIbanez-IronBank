@@ -4,6 +4,9 @@ package com.ironbank.service.KeycloakService;
 
 import com.ironbank.configuration.KeycloakProvider;
 import com.ironbank.http.requestUser.CreateUserRequest;
+import com.ironbank.model.users.AccountHolder;
+import com.ironbank.model.users.Address;
+import com.ironbank.service.users.AccountHolderService;
 import lombok.extern.java.Log;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.Response;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,14 +24,17 @@ import java.util.List;
 @Log
 public class KeycloakAdminClientService {
     private final KeycloakProvider kcProvider;
+
+    private final AccountHolderService accountHolderService;
     @Value("${keycloak.realm}")
     public String realm;
     @Value(("${keycloak.resource}"))
     public String clientId;
 
 
-    public KeycloakAdminClientService(KeycloakProvider keycloakProvider) {
+    public KeycloakAdminClientService(KeycloakProvider keycloakProvider, AccountHolderService accountHolderService) {
         this.kcProvider = keycloakProvider;
+        this.accountHolderService = accountHolderService;
     }
 
     private static CredentialRepresentation createPasswordCredentials(String password) {
@@ -64,8 +71,15 @@ public class KeycloakAdminClientService {
             var createdUser = userList.get(0);
             log.info("User with id: " + createdUser.getId() + " created");
 
-//            TODO you may add you logic to store and connect the keycloak user to the local user here
+//TODO CREAR ACCOUNT HOLDER PARA LA BBDD - Todos sus atributos
+        var accountHolder = new AccountHolder();
+        accountHolder.setName(user.getFirstname());
+        accountHolder.setEmail(user.getEmail());
+        accountHolder.setAddress(new Address(21,"salaBoadella","spain",199L)); //TODO
+        accountHolder.setDateOfBirth(LocalDate.now());
 
+        var createdAccountHolder = accountHolderService.create(accountHolder);
+        log.info("Account Holder:" + createdAccountHolder + "has been created");
         }
 
         return response;
