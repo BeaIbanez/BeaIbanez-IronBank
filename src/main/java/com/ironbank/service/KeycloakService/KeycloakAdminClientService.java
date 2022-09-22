@@ -64,13 +64,14 @@ public class KeycloakAdminClientService {
 
 
         Response response = usersResource.create(kcUser);
-
+//USER
         if (response.getStatus() == 201) {
             List<UserRepresentation> userList = adminKeycloak.realm(realm).users().search(kcUser.getUsername()).stream()
                     .filter(userRep -> userRep.getUsername().equals(kcUser.getUsername())).toList();
             var createdUser = userList.get(0);
             log.info("User with id: " + createdUser.getId() + " created");
 
+//ACCOUNTHOLDER
 //TODO CREAR ACCOUNT HOLDER PARA LA BBDD - Todos sus atributos
         var accountHolder = new AccountHolder();
         accountHolder.setName(user.getFirstname());
@@ -81,10 +82,10 @@ public class KeycloakAdminClientService {
         var createdAccountHolder = accountHolderService.create(accountHolder);
         log.info("Account Holder:" + createdAccountHolder + "has been created");
         }
-
         return response;
 
     }
+//ADMIN
 
 
 }

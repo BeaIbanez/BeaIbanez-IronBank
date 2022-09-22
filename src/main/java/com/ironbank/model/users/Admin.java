@@ -15,8 +15,16 @@ import javax.persistence.*;
 @Getter
 @Setter
 
-public class Admin extends User
+public class Admin
+        extends User
 {
+private String name;
+    public Admin(String name) {
+        this.name = name;
+    }
+
+
+
 
 
 }

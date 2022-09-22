@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class ThirdParty extends User
 {
 
-
+    private String name;
     private String hashedKey;
 
 }

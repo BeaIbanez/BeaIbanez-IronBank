@@ -24,6 +24,8 @@ public class User {
     @GeneratedValue()
     private long id;
 
+    @GeneratedValue()
+    private String keyCloakId;
    /* @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDate createDate;

@@ -103,7 +103,6 @@ public class TransactionServiceImpl implements TransactionService {
             }
 
             accountRepository.saveAll(List.of(fromAccount, toAccount));
-
         }
     }
     private void bothAccountsActive(Transaction transaction){
