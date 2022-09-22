@@ -93,16 +93,37 @@ public class SavingServiceImpl implements SavingService {
     }
 
 
-    private LocalDate addedInterestRate; //Methodo accedes al balance, tbien
-    // te dice desde la creatiion date ha pasado un año? si ha pasado un año, sumar
-//TODO desde la creacion ha pasado un año, si es asi, se
-    /*var today= localdate.now*/
+    /*public Saving addedInterestRate(Saving savingAccount) {
+        //YEARS
+        var today = LocalDate.now();
+        var firstYear = savingAccount.getCreateDate();
+        var difAge = ChronoUnit.YEARS.between(today, firstYear);
+        var interestRate = savingAccount.getInterestRate();
+        var balance = savingAccount.getBalance();
+        var lastAddInterestRate = new Money(balance.getAmount().multiply(interestRate.getAmount()));
+        if (difAge == 1) {
+          savingAccount.setBalance(lastAddInterestRate);
+            return savingAccount;
+        } else if (difAge>1) {
+            var fechaActual=LocalDate.now();
+            var createdDate = savingAccount.getCreateDate();
+            var lastSubstraction= savingAccount.getModifyDate();
+            var difYears = ChronoUnit.YEARS.between(createdDate, fechaActual);
+            var newBalance= new Money(balance.getAmount().multiply(interestRate.getAmount()));
+            savingAccount.setModifyDate(fechaActual);*/
 
-    //METHODO
-    //primero mirar creationdate, add.interest rate a la cuenta, seteas fecha =localdate.now
-    //If (creationDate.compararcontoday==1){
-    //se le suma interestRate al balance, seteas addInterestRateDate =localdate.now
-    //Else if (addInterestRateDate.compararcon.today==1)
-    //se le suma interestRate al balance, seteas addInterestRateDate =localdate.now
+    // variables necesarias: fecha_actual, fecha_creacion, fecha_ultima_substraccion, distancia_fechas, balance
+    // 1er ano -> comprobar diferencia entre f_c y f_a: d_f > 1 -> balance - interst -> f_u_s = hoy
+    // Siguientes anos -> comprobar diferencia entre f_u_s y f_a: d_f > 1 -> balance - interst -> f_u_s = hoy
+
+    // cada vez que pasa 1 año del firstyear, sumar interest rate
+    // cada vez que se hace el primer addInterestRate i se sume un año, quitar del balance el interest rate
+
+
+
+
+       /* }
+        return null;
+    }*/
 }
 
