@@ -1,6 +1,7 @@
 package com.ironbank.controller.users;
 
 import com.ironbank.model.users.AccountHolder;
+import com.ironbank.model.users.Admin;
 import com.ironbank.service.users.AccountHolderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/accountHolders")
+@RequestMapping("/account_holders")
 public class AccountHolderController {
     @Autowired
     AccountHolderService accountHolderService;
@@ -19,7 +20,7 @@ public class AccountHolderController {
     //All
     @GetMapping(path = "/all")
     @ResponseStatus(HttpStatus.OK)
-    public List< AccountHolder> findAll() {
+    public List<AccountHolder> findAll() {
         return accountHolderService.findAll();
     }
 

@@ -3,12 +3,12 @@ package com.ironbank.service.users;
 import com.ironbank.model.users.AccountHolder;
 
 
+import java.security.Principal;
 import java.util.List;
 
 
 public interface AccountHolderService {
 
-    List<AccountHolder> findAll();
 
     AccountHolder findById(long id);
 
@@ -25,4 +25,5 @@ public interface AccountHolderService {
     void deleteAccountHolder(long id);
 
 
+    List<AccountHolder> findAll();
 }

@@ -1,10 +1,7 @@
 package com.ironbank.Accounts;
 
 
-import com.ironbank.model.accounts.Checking;
-import com.ironbank.model.accounts.Credit;
-import com.ironbank.model.accounts.Saving;
-import com.ironbank.model.accounts.StudentChecking;
+import com.ironbank.model.accounts.*;
 import com.ironbank.model.users.AccountHolder;
 import com.ironbank.model.users.Address;
 import com.ironbank.model.users.Admin;
@@ -25,6 +22,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 
@@ -40,6 +40,8 @@ class accountsTester {
     private CheckingRepository checkingRepository;
     @Autowired
     private CreditRepository creditRepository;
+
+
     @Autowired
     private SavingRepository savingRepository;
     @Autowired
@@ -51,7 +53,13 @@ class accountsTester {
 // ACCOUNTS
         //CHECKING ACCOUNTS-----------------------------------------
         checkingRepository.deleteAll();
+        /*var date= LocalDate.of(2000, 10, 19);
+        var dateTwo= LocalDate.of(1999, 12, 12);
 
+        var aH= new AccountHolder("bea",  date, new Address(23,"Sala Boadella","Spain",130L),"bea@gmail.com");
+        var aC= new AccountHolder("TRokolo",  date, new Address(23,"Sala Boadella","Spain",130L),"bea@gmail.com");
+       var AccList= new List<Account> hey;
+        var primaryOwner = new Checking(new Money(BigDecimal.valueOf(1000)),"secret",aH,new Money(BigDecimal.valueOf(2)),aC,new BigDecimal(23333),dateTwo, Status.ACTIVE,AccList, date, dateTwo, new Money(BigDecimal.valueOf(100)));*/
         var checkingTest = List.of(
                 new Checking(),//TODO LLENARLOS
                 new Checking()//TODO LLENARLOS
@@ -63,7 +71,9 @@ class accountsTester {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
                 .build();
-        var checkingOne = new Checking();//TODO LLENARLOS
+
+
+        var checkingOne = new Checking(null);//TODO LLENARLOS
         checkingRepository.save(checkingOne);
 
 

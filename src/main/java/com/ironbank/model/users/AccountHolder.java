@@ -14,8 +14,7 @@ import java.time.LocalDate;
 @Setter
 
 
-public class AccountHolder
-        extends User
+public class AccountHolder extends User
 {
 
         private String name;
@@ -30,6 +29,7 @@ public class AccountHolder
                 this.address = address;
                 this.email = email;
         }
+
 
 
 }

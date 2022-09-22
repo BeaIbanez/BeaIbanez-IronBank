@@ -71,10 +71,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction create(Transaction transaction) {
-        bothAccountsActive(transaction); //TODO hacerlo bien
-/*
+
+        bothAccountsActive(transaction);
         validationAndProcess(transaction);
-*/
 
         return repository.save(transaction);
     }

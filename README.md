@@ -13,14 +13,14 @@
 <h3><u>INTRO</u> --> </h3>
 
 Each account and user has some requirements.<br><br>
-The admins:
+Admins:
 <ul>
 <l1>- They can access all balances </l1><br>
 <l1> - ThirdParty users can join the database </l1><br>
 <l1> - You can create new accounts</l1><br>
 </ul>
 
-The AccountHolders:
+AccountHolders:
 <ul>
 <l1>- Can  view the balance of their own accounts </l1><br>
 <l1> - Should be able to transfer money from any of their accounts to any other account </l1><br>
@@ -28,13 +28,13 @@ The AccountHolders:
 
 
 </ul>
-The ThirdParties:
+ThirdParties:
 <ul>
 <l1>- There is a way for third-party users to receive and send money to other accounts. </l1><br>
 <l1> -  should be able to transfer money from any of their accounts to any other account </l1><br>
 </ul>
 
-Obviously each account must have a diferents requirements; interestRate, a minimumBalance and CreditLimit
+Obviously each account  have their different requirements; interestRate, a minimumBalance and CreditLimit
 
 SavingAccounts:
 <ul>

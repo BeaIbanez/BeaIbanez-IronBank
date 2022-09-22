@@ -18,6 +18,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 
@@ -60,10 +62,11 @@ class usersTester {
         //ACCOUNTHOLDERS-----------------------------------------
 
         accountHolderRepository.deleteAll();
+      //TODO poner bien la fecha!
 
         var accountHolder = List.of(
-                new AccountHolder("Bea",null,new Address(23,"Sala Boadella","Spain",null),"beatrizip1@gmail.com"),
-                new AccountHolder("Sergio",null,new Address(10,"Sala Pimnxun","France",null),"sergio_ip@gmail.com"));
+                new AccountHolder("Bea", LocalDate.of(2000,10,20) ,new Address(23,"Sala Boadella","Spain",130L),"beatrizip1@gmail.com"),
+                new AccountHolder("Sergio",null,new Address(10,"Sala Pimnxun","France",130L),"sergio_ip@gmail.com"));
 //TODO POSTAL CODE
 
         accountHolderRepository.saveAll(accountHolder);

@@ -14,6 +14,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -39,4 +40,9 @@ public class Credit extends Account {
     @DecimalMax(value = "0.2", message = "Should be less than 0.2")
     private Money interestRate;
 
+    public Credit(Money balance, String secretKey, AccountHolder primaryOwner, Money minimumBalance, AccountHolder secondaryOwner, BigDecimal penaltyFee, Date localDate, Status status, List<Transaction> fromTransactions, List<Transaction> toTransactions, Date createDate, Date modifyDate, Money creditLimit, Money interestRate) {
+        super(balance, secretKey, primaryOwner, minimumBalance, secondaryOwner, penaltyFee, localDate, status, fromTransactions, toTransactions, createDate, modifyDate);
+        this.creditLimit = creditLimit;
+        this.interestRate = interestRate;
+    }
 }

@@ -71,7 +71,15 @@ public class Account {
     @JsonIgnore
     private List<Transaction> toTransactions;
 
-    public Account(Money balance, String secretKey, AccountHolder primaryOwner, Money minimumBalance, AccountHolder secondaryOwner, BigDecimal penaltyFee, Date localDate, Status status, List<Transaction> fromTransactions, List<Transaction> toTransactions) {
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createDate;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modifyDate;
+
+    public Account(Money balance, String secretKey, AccountHolder primaryOwner, Money minimumBalance, AccountHolder secondaryOwner, BigDecimal penaltyFee, Date localDate, Status status, List<Transaction> fromTransactions, List<Transaction> toTransactions, Date createDate, Date modifyDate) {
         this.balance = balance;
         this.secretKey = secretKey;
         this.primaryOwner = primaryOwner;
@@ -82,14 +90,7 @@ public class Account {
         this.status = status;
         this.fromTransactions = fromTransactions;
         this.toTransactions = toTransactions;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
     }
-
-/*    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate createDate;
-
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate modifyDate;*/
-
 }

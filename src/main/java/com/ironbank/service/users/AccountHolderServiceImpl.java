@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -16,10 +17,7 @@ public class AccountHolderServiceImpl implements AccountHolderService {
     @Autowired
     AccountHolderRepository repository;
 
-    @Override
-    public List<AccountHolder> findAll() {
-        return repository.findAll();
-    }
+
 
     @Override
     public AccountHolder findById(long id) {
@@ -65,5 +63,10 @@ public class AccountHolderServiceImpl implements AccountHolderService {
         if (repository.existsById(id)) {
             repository.deleteById(id);
         }
+    }
+
+    @Override
+    public List<AccountHolder> findAll() {
+            return repository.findAll();
     }
 }

@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 
@@ -24,13 +25,13 @@ public class User {
     @GeneratedValue()
     private long id;
 
-/*    @CreationTimestamp
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate createDate;
+    private Date createDate;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate modifyDate;*/
+    private Date modifyDate;
 
     @OneToMany(mappedBy = "primaryOwner", cascade={CascadeType.ALL} )
     @JsonIgnore

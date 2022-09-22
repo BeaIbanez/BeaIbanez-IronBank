@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -106,5 +107,7 @@ public class CheckingServiceImpl implements CheckingService {
     }
 
 
-
+    public List<Checking> findAll(Principal principal) {
+        return repository.findByPrimaryOwner((AccountHolder) principal);
+    }
 }

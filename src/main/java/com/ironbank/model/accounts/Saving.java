@@ -10,6 +10,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @NoArgsConstructor
@@ -24,5 +25,7 @@ public class Saving extends Account {
     @DecimalMin(value = "0.0025", message = "Should be more than 0.0025")
     @DecimalMax(value = "0.5", message = "Should be less than 0.5")
     private Money interestRate;
+
+    private LocalDate lastInterestRate;
 
 }
