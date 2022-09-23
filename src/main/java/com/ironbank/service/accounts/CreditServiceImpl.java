@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -100,18 +101,35 @@ public class CreditServiceImpl implements CreditService {
         return repository.save(changedName);
     }
 
-    //MONTHLY
-    private LocalDate addedInterestRate; //Methodo accedes al b5 minalance, tbien
-    // te dice desde la creatiion date ha pasado un año? si ha pasado un año, sumar
-    //TODO desde la creacion ha pasado un año, si es asi, se
-    //var today= localdate.now
+    @Override //TODO hacer el tiempo de meses
+    public void addedInterestRate(Credit account) {
+        //MONTHLY
+        var today = LocalDate.now();
+        var firstMonth = account.getCreateDate().toInstant();
+        var difAge = ChronoUnit.MONTHS.between(today, firstMonth);
 
-    //METHODO
-    //primero mirar creationdate, add.interest rate a la cuenta, seteas fecha =localdate.now
-    //If (creationDate.compararcontoday==1){
-    //se le suma interestRate al balance, seteas addInterestRateDate =localdate.now
-    //Else if (addInterestRateDate.compararcon.today==1)
-    //se le suma interestRate al balance, seteas addInterestRateDate =localdate.now
+        var lastInterestRate= account.getLastInterestRate();
+        var difTwo = ChronoUnit.MONTHS.between(today, lastInterestRate);
+
+        var interestRate = account.getInterestRate();
+        var balance = account.getBalance();
+
+        var lastAddInterestRate = new Money(balance.getAmount().multiply(interestRate.getAmount()));
+
+        if (difAge == 1) {
+            account.setBalance(lastAddInterestRate);
+            account.setLastInterestRate(today);
+
+        } else if (difTwo==1) {
+            account.setBalance(lastAddInterestRate);
+            account.setLastInterestRate(today);
+
+        }
+        repository.save(account);
+    }
+
+
+
 
 }
 

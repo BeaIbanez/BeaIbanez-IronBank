@@ -1,11 +1,12 @@
 package com.ironbank.service;
 
 import com.ironbank.model.Transaction;
-import com.ironbank.model.accounts.Account;
-import com.ironbank.model.accounts.Money;
-import com.ironbank.model.accounts.Status;
+import com.ironbank.model.accounts.*;
 import com.ironbank.repositories.TransactionRepository;
 import com.ironbank.repositories.accounts.AccountRepository;
+import com.ironbank.service.accounts.CreditService;
+import com.ironbank.service.accounts.SavingService;
+import com.ironbank.service.accounts.SavingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,10 @@ public class TransactionServiceImpl implements TransactionService {
     TransactionRepository repository;
     @Autowired
     AccountRepository accountRepository;
+    @Autowired
+    SavingService savingService;
+    @Autowired
+    CreditService creditService;
 
     @Override
     public List<Transaction> findAll() {
@@ -82,6 +87,10 @@ public class TransactionServiceImpl implements TransactionService {
     private void validationAndProcess(Transaction transaction) {
         var fromAccount = transaction.getFromAccount();
         var toAccount = transaction.getToAccount();
+
+        processInterestRate(fromAccount);
+        processInterestRate(toAccount);
+
         if (fromAccount.getBalance().getAmount().compareTo(transaction.getAmount()) < 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Not have enough Money for the transaction");
@@ -100,12 +109,22 @@ public class TransactionServiceImpl implements TransactionService {
                 applyPenaltyFee(fromAccount);
             }
 
-
-
             accountRepository.saveAll(List.of(fromAccount, toAccount));
 
         }
     }
+
+    public void processInterestRate (Account account){
+
+        if(account.getClass().toString().contains(".Saving")){
+            savingService.addedInterestRate((Saving) account);
+
+        }else if (account.getClass().toString().contains(".Credit")){
+            creditService.addedInterestRate((Credit) account);
+        }
+
+    }
+
     private void bothAccountsActive(Transaction transaction){
         var account=new Account();
         if (account.getStatus().equals(Status.ACTIVE)){
@@ -120,9 +139,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
     private void applyPenaltyFee(Account account) {
         account.setBalance(new Money((account.getBalance().getAmount().subtract(new BigDecimal(40))), account.getBalance().getCurrency()));
-
     }
-
 
     @Override
     public Transaction changeAmount(Long id, Transaction amount) {

@@ -94,11 +94,12 @@ public class SavingServiceImpl implements SavingService {
     }
 
 
-    public Saving addedInterestRate(Saving savingAccount) {
+    public void addedInterestRate(Saving savingAccount) {
         //YEARS
         var today = LocalDate.now();
         var firstYear = savingAccount.getCreateDate().toInstant();
         var difAge = ChronoUnit.YEARS.between(today, firstYear);
+
 
         var lastInterestRate= savingAccount.getLastInterestRate();
         var difTwo = ChronoUnit.YEARS.between(today, lastInterestRate);
@@ -112,15 +113,13 @@ public class SavingServiceImpl implements SavingService {
         if (difAge == 1) {
           savingAccount.setBalance(lastAddInterestRate);
           savingAccount.setLastInterestRate(today);
-            return savingAccount;
 
         } else if (difTwo==1) {
             savingAccount.setBalance(lastAddInterestRate);
             savingAccount.setLastInterestRate(today);
-            return savingAccount;
 
         }
-       return savingAccount;
+        repository.save(savingAccount);
     }
 }
 

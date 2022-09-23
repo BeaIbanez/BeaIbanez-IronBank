@@ -39,4 +39,5 @@ public interface CreditService {
     Credit changeBalance(long id, Credit balance);
 
 
+    void addedInterestRate(Credit account);
 }

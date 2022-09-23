@@ -36,4 +36,5 @@ public interface SavingService {
 
     Saving changeBalance(Long id, Saving balance);
 
+    void addedInterestRate(Saving account);
 }
