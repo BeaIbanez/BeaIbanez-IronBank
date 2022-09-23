@@ -10,8 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
-@RequestMapping("/studentcheckings")
+@RequestMapping("/v1/ironbank//studentcheckings")
 public class StudentCheckingController {
 
     @Autowired
@@ -19,21 +20,21 @@ public class StudentCheckingController {
 //GETMAPPING
 
     //All
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/moderator/all")
     @ResponseStatus(HttpStatus.OK)
     public List<StudentChecking> findAll() {
         return studentCheckingService.findAll();
     }
 
     //Id
-    @GetMapping(path = "/id")
+    @GetMapping(path = "/admin/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public StudentChecking findById(@RequestParam long id) {
         return studentCheckingService.findById(id);
     }
 
     //Balance
-    @GetMapping(path = "/balance")
+    @GetMapping(path = "/admin/balance/{balance}")
     @ResponseStatus(HttpStatus.OK)
     public List<StudentChecking> findByBalance(@RequestParam Money balance) {
         return studentCheckingService.findByBalance(balance);
@@ -47,21 +48,21 @@ public class StudentCheckingController {
     }
 
     //primaryOwner
-    @GetMapping(path = "/primaryOwner")
+    @GetMapping(path = "/admin/primaryOwner/{primaryOwner}")
     @ResponseStatus(HttpStatus.OK)
     public List<StudentChecking> findByPrimaryOwner(@RequestParam AccountHolder primaryOwner) {
         return studentCheckingService.findByPrimaryOwner(primaryOwner);
     }
 
     //changeBalance
-    @PatchMapping("/changebalance/{id}")
+    @PatchMapping("/admin/changebalance/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public StudentChecking changeBalance(@PathVariable long id, @RequestBody StudentChecking balance) {
         return studentCheckingService.changeBalance(id, balance);
     }
 
     //status
-    @GetMapping(path = "/status")
+    @GetMapping(path = "/admin/status/{status}")
     @ResponseStatus(HttpStatus.OK)
     public List<StudentChecking> findByStatus(@RequestParam Status status) {
         return studentCheckingService.findByStatus(status);
@@ -70,15 +71,15 @@ public class StudentCheckingController {
 
     //POSTMAPPING
     //create
-    @PostMapping
+    @PostMapping(path = "/admin/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public StudentChecking create(@RequestBody  StudentChecking  checking) {
+    public StudentChecking create(@RequestBody StudentChecking checking) {
         return studentCheckingService.create(checking);
     }
 
     //PATCHMAPPING
     //changeName
-    @PatchMapping("/name/{id}")
+    @PatchMapping("/admin/name/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public StudentChecking changePrimaryOwner(@PathVariable long id, @RequestBody StudentChecking primaryOwner) {
         return studentCheckingService.changePrimaryOwner(id, primaryOwner);

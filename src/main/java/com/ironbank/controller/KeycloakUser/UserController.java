@@ -1,7 +1,6 @@
 package com.ironbank.controller.KeycloakUser;
 
 
-
 import com.ironbank.configuration.KeycloakProvider;
 import com.ironbank.http.requestUser.CreateUserRequest;
 import com.ironbank.http.requestUser.LoginRequest;
@@ -24,8 +23,8 @@ public class UserController {
     private final KeycloakAdminClientService kcAdminClient;
 
     private final KeycloakProvider kcProvider;
-@Autowired
-CheckingService service;
+    @Autowired
+    CheckingService service;
 
     public UserController(KeycloakAdminClientService kcAdminClient, KeycloakProvider kcProvider) {
         this.kcProvider = kcProvider;
@@ -52,4 +51,4 @@ CheckingService service;
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(accessTokenResponse);
         }
     }
- }
+}

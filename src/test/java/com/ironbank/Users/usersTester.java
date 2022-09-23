@@ -1,6 +1,7 @@
 package com.ironbank.Users;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironbank.model.users.AccountHolder;
 import com.ironbank.model.users.Address;
 import com.ironbank.model.users.Admin;
@@ -15,13 +16,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
+import static java.lang.reflect.Array.get;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @SpringBootTest
@@ -30,7 +34,7 @@ class usersTester {
     @Autowired
     WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
-    /*private final ObjectMapper objectMapper = new ObjectMapper();*/
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
     private AdminRepository adminRepository;
@@ -38,11 +42,13 @@ class usersTester {
     private AccountHolderRepository accountHolderRepository;
     @Autowired
     private ThirdPartyRepository thirdPartyRepository;
+
     @BeforeEach
     void setUp_() {
+
 // USERS
         //ADMIN-----------------------------------------
-              adminRepository.deleteAll();
+        adminRepository.deleteAll();
 
         var admins = List.of(
                 new Admin("yep"),
@@ -62,20 +68,19 @@ class usersTester {
         //ACCOUNTHOLDERS-----------------------------------------
 
         accountHolderRepository.deleteAll();
-      //TODO poner bien la fecha!
+        //TODO poner bien la fecha!
 
-        var accountHolder = List.of(
-                new AccountHolder("Bea", LocalDate.of(2000,10,20) ,new Address(23,"Sala Boadella","Spain",130L),"beatrizip1@gmail.com"),
-                new AccountHolder("Sergio",null,new Address(10,"Sala Pimnxun","France",130L),"sergio_ip@gmail.com"));
+        var accountHolder = new AccountHolder("Bea", LocalDate.of(2000, 10, 20), new Address(23, "Sala Boadella", "Spain", 130L), "beatrizip1@gmail.com");
+
 //TODO POSTAL CODE
 
-        accountHolderRepository.saveAll(accountHolder);
+        accountHolderRepository.save(accountHolder);
 
         //MOCKMVC
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
                 .build();
-        var accountHolderOne = new AccountHolder("Lalo",null,new Address(23,"Sala Boadella","Spain",null),"beatrizip1@gmail.com");
+        var accountHolderOne = new AccountHolder("Lalo", LocalDate.of(1993, 10, 20), new Address(23, "Sala Boadella", "Spain", null), "beatrizip1@gmail.com");
         accountHolderRepository.save(accountHolderOne);
 
 
@@ -84,8 +89,8 @@ class usersTester {
         thirdPartyRepository.deleteAll();
 
         var thirdpartyNew = List.of(
-                new ThirdParty("Bea","8912819"),
-                new ThirdParty("Sergio","9910182jss"));
+                new ThirdParty("Bea", "8912819"),
+                new ThirdParty("Sergio", "9910182jss"));
 
 
         thirdPartyRepository.saveAll(thirdpartyNew);
@@ -94,7 +99,7 @@ class usersTester {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
                 .build();
-        var thirdPartyOne = new ThirdParty("Lalo","98999i");
+        var thirdPartyOne = new ThirdParty("Trixoide", "98999i");
         thirdPartyRepository.save(thirdPartyOne);
 
 
@@ -104,8 +109,16 @@ class usersTester {
     void tearDown() {
     }
 
-    @Test
-    void test_table() throws Exception {
+    /*@Test
+    void test_findAll() throws Exception {
+        var result = mockMvc
+                .perform(get(("/v1/ironbank/account_holders")))
+                .andExpect(status().isOk())
+                .andReturn();
+        assertTrue(result.getResponse().getContentAsString().contains("accountHolder"));
+    }*/
 
-    }
-    }
+
+}
+
+

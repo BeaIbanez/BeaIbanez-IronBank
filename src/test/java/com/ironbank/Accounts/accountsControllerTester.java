@@ -2,17 +2,10 @@ package com.ironbank.Accounts;
 
 
 import com.ironbank.model.accounts.*;
-import com.ironbank.model.users.AccountHolder;
-import com.ironbank.model.users.Address;
-import com.ironbank.model.users.Admin;
-import com.ironbank.model.users.ThirdParty;
 import com.ironbank.repositories.accounts.CheckingRepository;
 import com.ironbank.repositories.accounts.CreditRepository;
 import com.ironbank.repositories.accounts.SavingRepository;
 import com.ironbank.repositories.accounts.StudentCheckingRepository;
-import com.ironbank.repositories.users.AccountHolderRepository;
-import com.ironbank.repositories.users.AdminRepository;
-import com.ironbank.repositories.users.ThirdPartyRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,14 +15,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 
 @SpringBootTest
-class accountsTester {
+class accountsControllerTester {
 
     @Autowired
     WebApplicationContext webApplicationContext;
@@ -51,9 +41,6 @@ class accountsTester {
     @BeforeEach
     void setUp_() {
 // ACCOUNTS
-         //TODO
-        //Account  controller test
-        //Account service test
 
         //CHECKING ACCOUNTS-----------------------------------------
         checkingRepository.deleteAll();
@@ -148,4 +135,4 @@ class accountsTester {
     void test_table() throws Exception {
 
     }
-    }
+}

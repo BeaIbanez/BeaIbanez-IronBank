@@ -12,28 +12,27 @@ import java.util.Optional;
 
 public interface CheckingService {
 
-  List<Checking> findAll();
+    List<Checking> findAll();
 
-  Checking findById(Long id);
+    Checking findById(Long id);
 
-  List<Checking> findByBalance(Money balance);
+    List<Checking> findByBalance(Money balance);
 
-  List<Checking> findBySecretKey(String secretKey);
+    List<Checking> findBySecretKey(String secretKey);
 
-  List<Checking> findByPrimaryOwner(AccountHolder primaryOwner);
+    List<Checking> findByPrimaryOwner(AccountHolder primaryOwner);
 
-  List<Checking> findByStatus(Status status);
+    List<Checking> findByStatus(Status status);
 
-  Account create(Checking checking);
+    Account create(Checking checking);
 
-  Checking changePrimaryOwner(Long id, Checking primaryOwner);
+    Checking changePrimaryOwner(Long id, Checking primaryOwner);
 
-  Checking upDateChecking(Long id, Checking checking);
+    Checking upDateChecking(Long id, Checking checking);
 
-  void delete(Long id);
+    void delete(Long id);
 
-  Checking changeBalance(Long id, Checking balance);
-
+    Checking changeBalance(Long id, Checking balance);
 
 
 }

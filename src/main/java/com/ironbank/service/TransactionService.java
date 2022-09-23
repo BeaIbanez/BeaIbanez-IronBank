@@ -9,11 +9,13 @@ public interface TransactionService {
 
 
     List<Transaction> findAll();
+
     Transaction findById(long transferBalanceId);
+
     Transaction fromAccount(String fromAccount);
+
     Transaction toAccount(String toAccount);
 
-    //NAME
     Transaction fromAccountName(String fromAccountName);
 
     Transaction toAccountName(String toAccountName);

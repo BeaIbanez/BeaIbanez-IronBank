@@ -53,7 +53,8 @@ public class KeycloakAdminClientService {
         kcUser.setEmailVerified(false);
 
 //        Change this to change the group logic
-        kcUser.setGroups(List.of("members"));
+        kcUser.setGroups(List.of("members" ));
+        kcUser.setGroups(List.of("admins" ));
 
 
         Response response = usersResource.create(kcUser);
@@ -64,7 +65,7 @@ public class KeycloakAdminClientService {
             var createdUser = userList.get(0);
             log.info("User with id: " + createdUser.getId() + " created");
 
-//            TODO you may add you logic to store and connect the keycloak user to the local user here
+
 
         }
 

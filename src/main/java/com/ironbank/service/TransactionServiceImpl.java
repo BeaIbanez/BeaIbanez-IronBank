@@ -77,17 +77,16 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public Transaction create(Transaction transaction) {
 
-        bothAccountsActive(transaction);
-        validationAndProcess(transaction);
-
+        bothAccountsActive(transaction); //VALIDATION If there are one Account Frozen
+        validationAndProcess(transaction); //VALIDATION - InterestRate (Credit and Saving)
+        // - PenaltyFee (esta la cuenta en negativo)
+        // - If had enought money to tranfer money
         return repository.save(transaction);
     }
 
-    //VALIDATION IF NOT HAVE ENOUGH MONEY
     private void validationAndProcess(Transaction transaction) {
         var fromAccount = transaction.getFromAccount();
         var toAccount = transaction.getToAccount();
-
         processInterestRate(fromAccount);
         processInterestRate(toAccount);
 
@@ -97,46 +96,42 @@ public class TransactionServiceImpl implements TransactionService {
         } else {
             var fromBalance = fromAccount.getBalance().getAmount().subtract(transaction.getAmount());
             fromAccount.setBalance(new Money((fromBalance), fromAccount.getBalance().getCurrency()));
-
             var toBalance = toAccount.getBalance().getAmount().add(transaction.getAmount());
             toAccount.setBalance(new Money((toBalance), toAccount.getBalance().getCurrency()));
 
             if (toAccount.getBalance().getAmount().compareTo(toAccount.getMinimumBalance().getAmount()) < 0) {
                 applyPenaltyFee(toAccount);
             }
-
             if (fromAccount.getBalance().getAmount().compareTo(fromAccount.getMinimumBalance().getAmount()) < 0) {
                 applyPenaltyFee(fromAccount);
             }
-
             accountRepository.saveAll(List.of(fromAccount, toAccount));
-
         }
     }
 
-    public void processInterestRate (Account account){
+    public void processInterestRate(Account account) {
 
-        if(account.getClass().toString().contains(".Saving")){
+        if (account.getClass().toString().contains(".Saving")) {
             savingService.addedInterestRate((Saving) account);
 
-        }else if (account.getClass().toString().contains(".Credit")){
+        } else if (account.getClass().toString().contains(".Credit")) {
             creditService.addedInterestRate((Credit) account);
         }
-
     }
 
-    private void bothAccountsActive(Transaction transaction){
-        var account=new Account();
-        if (account.getStatus().equals(Status.ACTIVE)){
+    private void bothAccountsActive(Transaction transaction) {
+        var account = new Account();
+        if (account.getStatus().equals(Status.ACTIVE)) {
             throw new ResponseStatusException(HttpStatus.ACCEPTED,
                     "You're Account is ACTIVE, you can receive or pay a Transaction");
-            //validationAndProcess(transaction); TODO si esta ACTIVE hacer methodo validation and process
-        }else if (account.getStatus().equals(Status.FROZEN)){
+
+        } else if (account.getStatus().equals(Status.FROZEN)) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,
                     "your Account is Frozen, you can't receive or pay a transaction  ");
         }
 
     }
+
     private void applyPenaltyFee(Account account) {
         account.setBalance(new Money((account.getBalance().getAmount().subtract(new BigDecimal(40))), account.getBalance().getCurrency()));
     }

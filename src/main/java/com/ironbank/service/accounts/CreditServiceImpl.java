@@ -28,10 +28,10 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public Credit findById(Long id) {
-            return repository.findById(id).orElseThrow(()
-                    -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Credit with id " + id + "not found."));
-        }
+        return repository.findById(id).orElseThrow(()
+                -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "Credit with id " + id + "not found."));
+    }
 
     @Override
     public List<Credit> findByBalance(Money balance) {
@@ -108,7 +108,7 @@ public class CreditServiceImpl implements CreditService {
         var firstMonth = account.getCreateDate().toInstant();
         var difAge = ChronoUnit.MONTHS.between(today, firstMonth);
 
-        var lastInterestRate= account.getLastInterestRate();
+        var lastInterestRate = account.getLastInterestRate();
         var difTwo = ChronoUnit.MONTHS.between(today, lastInterestRate);
 
         var interestRate = account.getInterestRate();
@@ -120,15 +120,13 @@ public class CreditServiceImpl implements CreditService {
             account.setBalance(lastAddInterestRate);
             account.setLastInterestRate(today);
 
-        } else if (difTwo==1) {
+        } else if (difTwo == 1) {
             account.setBalance(lastAddInterestRate);
             account.setLastInterestRate(today);
 
         }
         repository.save(account);
     }
-
-
 
 
 }

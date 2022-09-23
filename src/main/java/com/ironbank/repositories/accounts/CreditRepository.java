@@ -14,14 +14,15 @@ import java.util.List;
 public interface CreditRepository extends JpaRepository<Credit, Long> {
 
 
-      Credit findById(String id);
+    Credit findById(String id);
 
-      List<Credit> findByBalance(Money balance);
+    List<Credit> findByBalance(Money balance);
 
-      List<Credit> findBySecretKey(String secretKey);
+    List<Credit> findBySecretKey(String secretKey);
 
-      List<Credit> findByPrimaryOwner(AccountHolder primaryOwner);
+    List<Credit> findByPrimaryOwner(AccountHolder primaryOwner);
 
-      List<Credit> findByStatus(Status status);
-      void delete(Credit entity);
+    List<Credit> findByStatus(Status status);
+
+    void delete(Credit entity);
 }

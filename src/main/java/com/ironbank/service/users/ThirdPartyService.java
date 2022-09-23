@@ -11,10 +11,9 @@ public interface ThirdPartyService {
 
     List<ThirdParty> findAll();
 
-   ThirdParty findById(long id);
+    ThirdParty findById(long id);
 
     List<ThirdParty> findByName(String name);
-
 
     ThirdParty upDateThirdParty(Long id, ThirdParty thirdParty);
 

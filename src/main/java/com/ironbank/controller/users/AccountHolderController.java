@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/account_holders")
+@RequestMapping("/v1/ironbank/account_holders")
 public class AccountHolderController {
     @Autowired
     AccountHolderService accountHolderService;
@@ -18,35 +18,36 @@ public class AccountHolderController {
 //GETMAPPING
 
     //All
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/moderator/all")
     @ResponseStatus(HttpStatus.OK)
     public List<AccountHolder> findAll() {
         return accountHolderService.findAll();
     }
 
     //Id
-    @GetMapping(path = "/id/{id}")
+    @GetMapping(path = "/admin/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public AccountHolder findById(@PathVariable("id") long id) {
         return accountHolderService.findById(id);
     }
 
     //Name
-    @GetMapping(path = "/name/{name}")
+    @GetMapping(path = "/admin/name/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public List< AccountHolder> findByName(@PathVariable("name") String name) {
+    public List<AccountHolder> findByName(@PathVariable("name") String name) {
         return accountHolderService.findByName(name);
     }
 
     //POSTMAPPING
     //create
-    @PostMapping
+    @PostMapping(path = "/admin/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public  AccountHolder create(@RequestBody AccountHolder accountHolder) {
+    public AccountHolder create(@RequestBody AccountHolder accountHolder) {
         return accountHolderService.create(accountHolder);
     }
+
     //DateOfBirth
-    @GetMapping
+    @GetMapping(path = "/admin/date-birthday/{birth}")
     @ResponseStatus(HttpStatus.OK)
     public List<AccountHolder> findByDateOfBirth(@RequestParam String birth) {
         return accountHolderService.findByDateOfBirth(birth);
@@ -54,7 +55,7 @@ public class AccountHolderController {
 
     //PATCHMAPPING
     //changeName
-    @PatchMapping("/name/{id}")
+    @PatchMapping("/admin/name/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public AccountHolder changeName(@PathVariable Long id, @RequestBody AccountHolder name) {
         return accountHolderService.changeName(id, name);
@@ -62,14 +63,15 @@ public class AccountHolderController {
 
     //PUTMAPPING
     //upDateAdmin
-    @PutMapping(path = "/accountHolder/{id}")
+    @PutMapping(path = "/admin/accountHolder/{id}")
     @ResponseStatus(HttpStatus.OK)
     public AccountHolder upDateAccountHolder(@PathVariable Long id, @RequestBody AccountHolder accountHolder) {
         return accountHolderService.upDateAccountHolder(id, accountHolder);
     }
+
     //PUTMAPPING
     //deleteAdmin
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("/admin/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteAccountHolder(@PathVariable("id") long id) {
         accountHolderService.deleteAccountHolder(id);

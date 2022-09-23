@@ -13,58 +13,56 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/savings")
+@RequestMapping("/v1/ironbank/savings")
 public class SavingController {
 
     @Autowired
     SavingService savingsService;
-//GETMAPPING
-
+    //GETMAPPING
     //All
-    @GetMapping (path = "/admin/all")
-
+    @GetMapping(path = "/moderator/all")
     @ResponseStatus(HttpStatus.OK)
     public List<Saving> findAll() {
         return savingsService.findAll();
     }
 
     //Id
-    @GetMapping(path = "/id")
+    @GetMapping(path = "/admin/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Saving findById(@RequestParam Long id) {
         return savingsService.findById(id);
     }
 
     //Balance //NotTODO
-    @GetMapping(path = "/balance")
+    @GetMapping(path = "/admin/balance/{balance}")
     @ResponseStatus(HttpStatus.OK)
     public List<Saving> findByBalance(@RequestParam Money balance) {
         return savingsService.findByBalance(balance);
     }
 
     //secretKey
-    @GetMapping(path = "/secretKey")
+    @GetMapping(path = "/admin/secretKey/{secretKey}")
     @ResponseStatus(HttpStatus.OK)
     public List<Saving> findBySecretKey(@RequestParam String secretKey) {
         return savingsService.findBySecretKey(secretKey);
     }
 
     //primaryOwner
-    @GetMapping(path = "/primaryOwner")
+    @GetMapping(path = "/admin/primaryOwner/{primaryOwner}")
     @ResponseStatus(HttpStatus.OK)
     public List<Saving> findByPrimaryOwner(@RequestParam AccountHolder primaryOwner) {
         return savingsService.findByPrimaryOwner(primaryOwner);
     }
 
     //changeBalance
-    @PatchMapping("/changebalance/{id}")
+    @PatchMapping("/admin/changebalance/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Saving changeBalance(@PathVariable Long id, @RequestBody StudentChecking balance) {
         return savingsService.changeBalance(id, balance);
     }
 
     //status
-    @GetMapping(path = "/status")
+    @GetMapping(path = "/admin/status/{status}")
     @ResponseStatus(HttpStatus.OK)
     public List<Saving> findByStatus(@RequestParam Status status) {
         return savingsService.findByStatus(status);
@@ -73,15 +71,15 @@ public class SavingController {
 
     //POSTMAPPING
     //create
-    @PostMapping
+    @PostMapping(path = "/admin/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Saving create(@RequestBody  Saving  saving) {
+    public Saving create(@RequestBody Saving saving) {
         return savingsService.create(saving);
     }
 
     //PATCHMAPPING
     //changeName
-    @PatchMapping("/name/{id}")
+    @PatchMapping("/admin/name/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Saving changePrimaryOwner(@PathVariable Long id, @RequestBody Saving primaryOwner) {
         return savingsService.changePrimaryOwner(id, primaryOwner);
@@ -89,7 +87,7 @@ public class SavingController {
 
     //PUTMAPPING
     //upDateAdmin
-    @PutMapping(path = "/checkingupdate/{id}")
+    @PutMapping(path = "/admin/checkingupdate/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Saving upDateStudentChecking(@PathVariable Long id, @RequestBody Saving saving) {
         return savingsService.upDateSaving(id, saving);
@@ -97,7 +95,7 @@ public class SavingController {
 
     //PUTMAPPING
     //deleteAdmin
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("/admin/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         savingsService.delete(id);

@@ -12,7 +12,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     Transaction toAccount(String toAccount);
 
-
     Transaction findByAmount(BigDecimal amount);
 
     Transaction fromAccountName(String fromAccountName);

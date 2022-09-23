@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Long> {
 
-      List<Admin> findByName(String name);
+    List<Admin> findByName(String name);
 
 
 }

@@ -17,8 +17,6 @@ public class AccountHolderServiceImpl implements AccountHolderService {
     @Autowired
     AccountHolderRepository repository;
 
-
-
     @Override
     public AccountHolder findById(long id) {
         return repository.findById(id).orElseThrow(()
@@ -67,6 +65,6 @@ public class AccountHolderServiceImpl implements AccountHolderService {
 
     @Override
     public List<AccountHolder> findAll() {
-            return repository.findAll();
+        return repository.findAll();
     }
 }

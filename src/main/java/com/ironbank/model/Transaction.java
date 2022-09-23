@@ -32,12 +32,5 @@ public class Transaction {
     private String fromAccountName;
     private String toAccountName;
 
-  /*  @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-       private LocalDate createDate;
-
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate modifyDate;*/
 
 }

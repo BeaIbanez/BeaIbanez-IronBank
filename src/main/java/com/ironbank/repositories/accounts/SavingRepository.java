@@ -14,8 +14,7 @@ import java.util.List;
 public interface SavingRepository extends JpaRepository<Saving, Long> {
 
 
-
-      Saving findById(String id);
+    Saving findById(String id);
 
     List<Saving> findByBalance(Money balance);
 
@@ -24,5 +23,6 @@ public interface SavingRepository extends JpaRepository<Saving, Long> {
     List<Saving> findByPrimaryOwner(AccountHolder primaryOwner);
 
     List<Saving> findByStatus(Status status);
+
     void delete(Saving entity);
 }

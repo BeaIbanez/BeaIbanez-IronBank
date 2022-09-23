@@ -28,6 +28,7 @@ public class SavingServiceImpl implements SavingService {
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "Saving with id " + id + "not found."));
     }
+
     @Override
     public List<Saving> findByBalance(Money balance) {
         return repository.findByBalance(balance);
@@ -101,7 +102,7 @@ public class SavingServiceImpl implements SavingService {
         var difAge = ChronoUnit.YEARS.between(today, firstYear);
 
 
-        var lastInterestRate= savingAccount.getLastInterestRate();
+        var lastInterestRate = savingAccount.getLastInterestRate();
         var difTwo = ChronoUnit.YEARS.between(today, lastInterestRate);
 
 
@@ -111,10 +112,10 @@ public class SavingServiceImpl implements SavingService {
         var lastAddInterestRate = new Money(balance.getAmount().multiply(interestRate.getAmount()));
 
         if (difAge == 1) {
-          savingAccount.setBalance(lastAddInterestRate);
-          savingAccount.setLastInterestRate(today);
+            savingAccount.setBalance(lastAddInterestRate);
+            savingAccount.setLastInterestRate(today);
 
-        } else if (difTwo==1) {
+        } else if (difTwo == 1) {
             savingAccount.setBalance(lastAddInterestRate);
             savingAccount.setLastInterestRate(today);
 

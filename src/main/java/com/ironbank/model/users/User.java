@@ -16,7 +16,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NoArgsConstructor
 @Entity
 
@@ -33,11 +33,11 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifyDate;
 
-    @OneToMany(mappedBy = "primaryOwner", cascade={CascadeType.ALL} )
+    @OneToMany(mappedBy = "primaryOwner", cascade = {CascadeType.ALL})
     @JsonIgnore
     private List<Account> accounts;
 
-    @OneToMany(mappedBy = "secondaryOwner", cascade={CascadeType.ALL} )
+    @OneToMany(mappedBy = "secondaryOwner", cascade = {CascadeType.ALL})
     @JsonIgnore
     private List<Account> secondaryAccounts;
 

@@ -14,7 +14,6 @@ import java.util.List;
 public interface StudentCheckingRepository extends JpaRepository<StudentChecking, Long> {
 
 
-
     List<StudentChecking> findByBalance(Money balance);
 
     List<StudentChecking> findBySecretKey(String secretKey);
@@ -22,5 +21,6 @@ public interface StudentCheckingRepository extends JpaRepository<StudentChecking
     List<StudentChecking> findByPrimaryOwner(AccountHolder primaryOwner);
 
     List<StudentChecking> findByStatus(Status status);
+
     void delete(StudentChecking entity);
 }

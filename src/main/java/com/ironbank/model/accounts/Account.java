@@ -22,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
 
 public class Account {
@@ -47,7 +47,8 @@ public class Account {
     @AttributeOverrides({
             @AttributeOverride(name = "amount", column = @Column(name = "minimum_balance")),
             @AttributeOverride(name = "currency", column = @Column(name = "minimum_balance_currency"))
-    })    @Embedded
+    })
+    @Embedded
     @DecimalMin(value = "100", message = "Should be more than 100")
     @DecimalMax(value = "1000", message = "Should be less than 1000")
     private Money minimumBalance;

@@ -13,14 +13,14 @@ import java.util.List;
 public interface CheckingRepository extends JpaRepository<Checking, Long> {
 
 
-      List<Checking> findByBalance(Money balance);
+    List<Checking> findByBalance(Money balance);
 
-      List<Checking> findBySecretKey(String secretKey);
+    List<Checking> findBySecretKey(String secretKey);
 
-      List<Checking> findByPrimaryOwner(AccountHolder primaryOwner);
+    List<Checking> findByPrimaryOwner(AccountHolder primaryOwner);
 
-      List<Checking> findByStatus(Status status);
+    List<Checking> findByStatus(Status status);
 
 
-      void delete(Checking entity);
+    void delete(Checking entity);
 }

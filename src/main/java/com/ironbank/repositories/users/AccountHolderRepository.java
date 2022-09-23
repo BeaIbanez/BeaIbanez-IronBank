@@ -10,8 +10,7 @@ import java.util.List;
 @Repository
 public interface AccountHolderRepository extends JpaRepository<AccountHolder, Long> {
 
-      List<AccountHolder> findByName(String name);
+    List<AccountHolder> findByName(String name);
 
-
-      List<AccountHolder> findByDateOfBirth(String birth);
+    List<AccountHolder> findByDateOfBirth(String birth);
 }

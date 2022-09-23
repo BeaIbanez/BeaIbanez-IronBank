@@ -27,7 +27,7 @@ public class Checking extends Account {
             @AttributeOverride(name = "currency", column = @Column(name = "monthly_maitenance_fee_currency"))
     })
     @Embedded
-    @Digits(integer=12, fraction=0)
+    @Digits(integer = 12, fraction = 0)
     private Money monthlyMaintenanceFee;
 
     public Checking(Money balance, String secretKey, AccountHolder primaryOwner, Money minimumBalance, AccountHolder secondaryOwner, BigDecimal penaltyFee, Date localDate, Status status, List<Transaction> fromTransactions, List<Transaction> toTransactions, Date createDate, Date modifyDate, Money monthlyMaintenanceFee) {

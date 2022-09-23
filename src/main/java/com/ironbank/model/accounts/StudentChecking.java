@@ -20,10 +20,5 @@ import java.util.List;
 public class StudentChecking extends Account {
     public StudentChecking(Money balance, String secretKey, AccountHolder primaryOwner, Money minimumBalance, AccountHolder secondaryOwner, BigDecimal penaltyFee, Date localDate, Status status, List<Transaction> fromTransactions, List<Transaction> toTransactions) {
     }
-
-
- /*   public StudentChecking(Money balance, String secretKey, AccountHolder primaryOwner, Money minimumBalance, AccountHolder secondaryOwner, BigDecimal penaltyFee, Date localDate, Status status, List<Transaction> fromTransactions, List<Transaction> toTransactions) {
-        super(balance, secretKey, primaryOwner, minimumBalance, secondaryOwner, penaltyFee, localDate, status, fromTransactions, toTransactions);
-    }*/
 }
 

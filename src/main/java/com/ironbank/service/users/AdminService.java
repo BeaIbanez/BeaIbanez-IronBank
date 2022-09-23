@@ -9,7 +9,9 @@ import java.util.Optional;
 public interface AdminService {
 
     List<Admin> findAll();
+
     Admin findById(long id);
+
     List<Admin> findByName(String name);
 
     Admin create(Admin admin);

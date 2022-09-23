@@ -31,7 +31,7 @@ public class CheckingServiceImpl implements CheckingService {
 
     @Override
     public Checking findById(Long id) {
-       return repository.findById(id).orElseThrow(()
+        return repository.findById(id).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "Checking with id " + id + "not found."));
     }
@@ -59,17 +59,17 @@ public class CheckingServiceImpl implements CheckingService {
     @Override
     public Account create(Checking checking) {
 
-        var accountHolderDOB= checking.getPrimaryOwner().getDateOfBirth();
-        var date= LocalDate.now();
-        var difAge= ChronoUnit.YEARS.between(accountHolderDOB, date);
+        var accountHolderDOB = checking.getPrimaryOwner().getDateOfBirth();
+        var date = LocalDate.now();
+        var difAge = ChronoUnit.YEARS.between(accountHolderDOB, date);
 
-        var studentCheck= new StudentChecking (checking.getBalance(),checking.getSecretKey(),checking.getPrimaryOwner(),checking.getMinimumBalance(),
-        checking.getSecondaryOwner(),checking.getPenaltyFee(),checking.getLocalDate(),checking.getStatus(),checking.getFromTransactions(),checking.getToTransactions());
+        var studentCheck = new StudentChecking(checking.getBalance(), checking.getSecretKey(), checking.getPrimaryOwner(), checking.getMinimumBalance(),
+                checking.getSecondaryOwner(), checking.getPenaltyFee(), checking.getLocalDate(), checking.getStatus(), checking.getFromTransactions(), checking.getToTransactions());
 
-        if(difAge < 24){
+        if (difAge < 24) {
 
-                    return studentCheckingService.create(studentCheck);
-                }
+            return studentCheckingService.create(studentCheck);
+        }
 
         return repository.save(checking);
     }
@@ -84,7 +84,7 @@ public class CheckingServiceImpl implements CheckingService {
 
     @Override
     public Checking upDateChecking(Long id, Checking checking) {
-        Checking upDateChecking =  findById(id);
+        Checking upDateChecking = findById(id);
         var changedName = upDateChecking;
         changedName.setPrimaryOwner(checking.getPrimaryOwner());
         return repository.save(changedName);
@@ -93,7 +93,8 @@ public class CheckingServiceImpl implements CheckingService {
     @Override
     public void delete(Long id) {
         Checking checkingDel = new Checking();
-        if (repository.existsById(id)); {
+        if (repository.existsById(id)) ;
+        {
             repository.deleteById(id);
         }
     }

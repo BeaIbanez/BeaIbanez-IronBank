@@ -28,6 +28,7 @@ public class StudentCheckingServiceImpl implements StudentCheckingService {
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "StudentCheking with id " + id + "not found."));
     }
+
     @Override
     public List<StudentChecking> findByBalance(Money balance) {
         return repository.findByBalance(balance);
@@ -42,6 +43,7 @@ public class StudentCheckingServiceImpl implements StudentCheckingService {
     public List<StudentChecking> findByPrimaryOwner(AccountHolder primaryOwner) {
         return repository.findByPrimaryOwner(primaryOwner);
     }
+
     @Override
     public List<StudentChecking> findByStatus(Status status) {
         return repository.findByStatus(status);
@@ -69,7 +71,6 @@ public class StudentCheckingServiceImpl implements StudentCheckingService {
         changedName.setPrimaryOwner(StudentChecking.getPrimaryOwner());
         return repository.save(changedName);
     }
-
 
 
     @Override

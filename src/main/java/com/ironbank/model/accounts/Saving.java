@@ -20,7 +20,6 @@ import java.util.Date;
 @Entity
 public class Saving extends Account {
 
-
     @Embedded
     @DecimalMin(value = "0.0025", message = "Should be more than 0.0025")
     @DecimalMax(value = "0.5", message = "Should be less than 0.5")

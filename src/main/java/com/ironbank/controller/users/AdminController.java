@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/admins")
+@RequestMapping("v1/ironbank/admins")
 public class AdminController {
     @Autowired
     AdminService adminService;
@@ -19,30 +19,29 @@ public class AdminController {
 //GETMAPPING
 
     //All
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/moderator/all")
     @ResponseStatus(HttpStatus.OK)
     public List<Admin> findAll() {
         return adminService.findAll();
     }
 
-    @GetMapping(path = "/id/{id}")
+    @GetMapping(path = "/admin/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Admin findById(@PathVariable("id") long id) {
         return adminService.findById(id);
     }
 
     //Name
-    @GetMapping(path = "/name/{name}")
+    @GetMapping(path = "/admin/name/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public List< Admin> findByName(@PathVariable("name") String name) {
+    public List<Admin> findByName(@PathVariable("name") String name) {
         return adminService.findByName(name);
     }
 
 
-
     //POSTMAPPING
     //create
-    @PostMapping
+    @PostMapping(path = "/admin/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Admin create(@RequestBody Admin admin) {
         return adminService.create(admin);
@@ -50,7 +49,7 @@ public class AdminController {
 
     //PATCHMAPPING
     //changeName
-    @PatchMapping("/changename/{id}")
+    @PatchMapping("/admin/changename/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Admin changeName(@PathVariable Long id, @RequestBody Admin name) {
         return adminService.changeName(id, name);
@@ -58,7 +57,7 @@ public class AdminController {
 
     //PUTMAPPING
     //deleteAdmin
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("/admin/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteAdmin(@PathVariable("id") long id) {
         adminService.deleteAdmin(id);

@@ -14,8 +14,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 
-public class ThirdParty extends User
-{
+public class ThirdParty extends User {
 
     private String name;
     private String hashedKey;

@@ -22,9 +22,6 @@ public class Response<T> {
 
     @Autowired
     CheckingService checkingService;
-
-
-
     private Status status;
     private T payload;
     private Object errors;

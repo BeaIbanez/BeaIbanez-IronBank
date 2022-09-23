@@ -25,8 +25,6 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class Credit extends Account {
-
-
     @AttributeOverrides({
             @AttributeOverride(name = "amount", column = @Column(name = "credit_limit")),
             @AttributeOverride(name = "currency", column = @Column(name = "credit_limit_currency"))

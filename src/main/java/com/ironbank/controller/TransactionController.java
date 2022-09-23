@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/transactions")
+@RequestMapping("/v1/ironbank/transactions")
 public class TransactionController {
 
     @Autowired
@@ -18,78 +18,72 @@ public class TransactionController {
 
 
     //GETS
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/moderator/all")
     @ResponseStatus(HttpStatus.OK)
     public List<Transaction> findAll() {
         return transactionService.findAll();
     }
 
-    @GetMapping(path = "/id/{id}")
+    @GetMapping(path = "/admin/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Transaction findById(@PathVariable("id") long id) {
         return transactionService.findById(id);
     }
 
 
-    @GetMapping(path = "/fromaccount/{fromAccountNumber}")
+    @GetMapping(path = "/admin/fromaccount/{fromAccountNumber}")
     @ResponseStatus(HttpStatus.OK)
     public Transaction fromAccountNumber(@PathVariable("fromAccountNumber") String fromAccountNumber) {
         return transactionService.fromAccount(fromAccountNumber);
     }
 
 
-    @GetMapping(path = "/toaccount/{toAccountNumber}")
+    @GetMapping(path = "/admin/toaccount/{toAccountNumber}")
     @ResponseStatus(HttpStatus.OK)
     public Transaction toAccountNumber(@PathVariable("toAccountNumber") String toAccountNumber) {
         return transactionService.toAccount(toAccountNumber);
     }
-    @GetMapping(path = "/nameFrom/{primaryOwnerFrom}")
+
+    @GetMapping(path = "/admin/nameFrom/{primaryOwnerFrom}")
     @ResponseStatus(HttpStatus.OK)
     public Transaction fromAccountName(@PathVariable("primaryOwnerFrom") String fromAccountName) {
         return transactionService.fromAccountName(fromAccountName);
     }
 
 
-    @GetMapping(path = "/amount/{amount}")
+    @GetMapping(path = "/admin/amount/{amount}")
     @ResponseStatus(HttpStatus.OK)
     public Transaction findByAmount(@PathVariable("amount") BigDecimal findByAmount) {
         return transactionService.findByAmount(findByAmount);
     }
 
-
-
-
     //POST
-    @PostMapping
+    @PostMapping(path = "/admin/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public  Transaction create(@RequestBody Transaction transaction) {
-        var result= transactionService.create(transaction);
+    public Transaction create(@RequestBody Transaction transaction) {
+        var result = transactionService.create(transaction);
         System.out.println(result);
         return result;
-/*
-        return transactionService.create(transaction);
-*/
+
     }
 
-
-
-
     //PATCH
-
     //changeAmount
-    @PatchMapping("/amount/{transferBalanceId}")
+    @PatchMapping("/admin/amount/{transferBalanceId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Transaction changeAmount(@PathVariable Long transferBalanceId, @RequestBody Transaction amount) {
         return transactionService.changeAmount(transferBalanceId, amount);
 
     }
-    @PatchMapping("/fromAccountNumber/{id}")
+
+    @PatchMapping("/admin/fromAccountNumber/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Transaction changeFromAccountNumber(@PathVariable Long transferBalanceId, @RequestBody Transaction fromAccountNumber) {
         return transactionService.changeFromAccountNumber(transferBalanceId, fromAccountNumber);
 
     }
-    @PatchMapping("/toAccountNumber/{transferBalanceId}")
+
+    @PatchMapping("/admin/toAccountNumber/{transferBalanceId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Transaction changeToAccountNumber(@PathVariable Long transferBalanceId, @RequestBody Transaction toAccountNumber) {
         return transactionService.changeToAccountNumber(transferBalanceId, toAccountNumber);
@@ -98,7 +92,7 @@ public class TransactionController {
 
     //PUT
     //delete
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("/admin/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteTransaction(@PathVariable("id") long id) {
         transactionService.deleteTransaction(id);

@@ -12,58 +12,61 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
-@RequestMapping("/checkings")
+@RequestMapping("/v1/ironbank/checkings")
 public class CheckingController {
 
     @Autowired
     CheckingService checkingService;
-//GETMAPPING
+    //GETMAPPING
 
     //All
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/moderator/all")
     @ResponseStatus(HttpStatus.OK)
     public List<Checking> findAll() {
-        return checkingService.findAll();
+        List<Checking> all = checkingService.findAll();
+        return all;
     }
 
     //Id
-    @GetMapping(path = "/id/{id}")
+    @GetMapping(path = "/admin/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Checking findById(@RequestParam Long id) {
         return checkingService.findById(id);
     }
 
     //Balance
-    @GetMapping(path = "/balance/{balance}")
+    @GetMapping(path = "/admin/balance/{balance}")
     @ResponseStatus(HttpStatus.OK)
     public List<Checking> findByBalance(@RequestParam Money balance) {
         return checkingService.findByBalance(balance);
     }
 
     //secretKey
-    @GetMapping(path = "/secretKey/{secretKey}")
+    @GetMapping(path = "/admin/secretKey/{secretKey}")
     @ResponseStatus(HttpStatus.OK)
     public List<Checking> findBySecretKey(@RequestParam String secretKey) {
         return checkingService.findBySecretKey(secretKey);
     }
 
     //primaryOwner
-    @GetMapping(path = "/primaryOwner/{primaryOwner}")
+    @GetMapping(path = "/admin/primaryOwner/{primaryOwner}")
     @ResponseStatus(HttpStatus.OK)
     public List<Checking> findByPrimaryOwner(@RequestParam AccountHolder primaryOwner) {
         return checkingService.findByPrimaryOwner(primaryOwner);
     }
+
     //PATCHMAPPING
     //changeBalance
-    @PatchMapping("/changebalance/{id}")
+    @PatchMapping("/admin/changebalance/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Checking changeBalance(@PathVariable Long id, @RequestBody Checking balance) {
         return checkingService.changeBalance(id, balance);
     }
 
     //status
-    @GetMapping(path = "/status/{status}")
+    @GetMapping(path = "/admin/status/{status}")
     @ResponseStatus(HttpStatus.OK)
     public List<Checking> findByStatus(@RequestParam Status status) {
         return checkingService.findByStatus(status);
@@ -72,7 +75,7 @@ public class CheckingController {
 
     //POSTMAPPING
     //create
-    @PostMapping
+    @PostMapping(path = "/admin/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Account create(@RequestBody Checking checking) {
 
@@ -81,7 +84,7 @@ public class CheckingController {
 
     //PATCHMAPPING
     //changeName
-    @PatchMapping("/name/{id}")
+    @PatchMapping("/admin/name/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Checking changePrimaryOwner(@PathVariable Long id, @RequestBody Checking primaryOwner) {
         return checkingService.changePrimaryOwner(id, primaryOwner);
@@ -89,7 +92,7 @@ public class CheckingController {
 
     //PUTMAPPING
     //upDateAdmin
-    @PutMapping(path = "/checkingupdate/{id}")
+    @PutMapping(path = "/admin/checkingupdate/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Checking upDateChecking(@PathVariable Long id, @RequestBody Checking checking) {
         return checkingService.upDateChecking(id, checking);
@@ -97,7 +100,7 @@ public class CheckingController {
 
     //PUTMAPPING
     //deleteAdmin
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("/admin/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         checkingService.delete(id);

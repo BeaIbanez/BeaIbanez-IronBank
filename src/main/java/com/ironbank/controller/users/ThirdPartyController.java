@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/thirdParties")
+@RequestMapping("/v1/ironbank/thirdParties")
 public class ThirdPartyController {
     @Autowired
     ThirdPartyService thirdPartyService;
@@ -18,26 +18,26 @@ public class ThirdPartyController {
 //GETMAPPING
 
     //All
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/moderator/all")
     @ResponseStatus(HttpStatus.OK)
     public List<ThirdParty> findAll() {
         return thirdPartyService.findAll();
     }
 
-    @GetMapping(path = "/id/{id}")
+    @GetMapping(path = "/admin/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ThirdParty findById(@PathVariable("id") long id) {
         return thirdPartyService.findById(id);
     }
 
     //Name
-    @GetMapping(path = "/name/{name}")
+    @GetMapping(path = "/admin/name/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public List< ThirdParty> findByName(@PathVariable("name") String name) {
+    public List<ThirdParty> findByName(@PathVariable("name") String name) {
         return thirdPartyService.findByName(name);
     }
 
-    @GetMapping(path = "/key/{key}")
+    @GetMapping(path = "/admin/key/{key}")
     @ResponseStatus(HttpStatus.OK)
     public List<ThirdParty> findByHashedKey(@PathVariable("key") String hashedKey) {
         return thirdPartyService.findByHashedKey(hashedKey);
@@ -45,7 +45,7 @@ public class ThirdPartyController {
 
     //POSTMAPPING
     //create
-    @PostMapping
+    @PostMapping(path = "/admin/create")
     @ResponseStatus(HttpStatus.CREATED)
     public ThirdParty create(@RequestBody ThirdParty thirdParty) {
         return thirdPartyService.create(thirdParty);
@@ -53,7 +53,7 @@ public class ThirdPartyController {
 
     //PATCHMAPPING
     //changeName
-    @PatchMapping("/name/{id}")
+    @PatchMapping("/admin/name/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ThirdParty changeName(@PathVariable Long id, @RequestBody ThirdParty name) {
         return thirdPartyService.changeName(id, name);
@@ -61,14 +61,15 @@ public class ThirdPartyController {
 
     //PUTMAPPING
     //upDateAdmin
-    @PutMapping(path = "/adminupdate/{id}")
+    @PutMapping(path = "/admin/adminupdate/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ThirdParty upDateThirdParty(@PathVariable Long id, @RequestBody ThirdParty thirdParty) {
         return thirdPartyService.upDateThirdParty(id, thirdParty);
     }
+
     //PUTMAPPING
     //deleteAdmin
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("/admin/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteThirdParty(@PathVariable("id") long id) {
         thirdPartyService.deleteAdmin(id);
